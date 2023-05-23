@@ -3,16 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Penjual;
+use DB;
 
-class DashboardController extends Controller
+class PenjualController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //ini diarahkan ke view dashboard
-        return view('admin.dashboard');
+        //
+        $penjual = DB::table('penjual')->get();
+        return view('admin.penjual.index', compact('penjual'));
     }
 
     /**

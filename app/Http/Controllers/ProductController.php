@@ -2,19 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\PegawaiModel;
 use Illuminate\Http\Request;
+use App\Models\Penjual;
+use App\Models\Product;
 
-class PegawaiController extends Controller
+class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $data = PegawaiModel::get();
-        // echo $data;
-        return view('admin.pegawai.index', compact('data'));
+        //
+        $product = Product::join('penjual', 'product.penjual_id', '=', 'penjual.id')
+        ->select('product.*', 'penjual.nama as penjual')
+        ->get();
+        return view('admin.product.index', compact('product'));
     }
 
     /**

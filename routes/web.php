@@ -8,6 +8,11 @@ use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\UserController;
 
+use App\Http\Controllers\PenjualController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\Product_GalleriesController;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,6 +27,7 @@ use App\Http\Controllers\UserController;
 Route::get('/', function () {
     return view('welcome');
 });
+
 Route::get('/salam', function () {
     return "Selamat pagi";
 }); // ini adalah routing untuk pemanggilan dirinya sendiri
@@ -47,3 +53,9 @@ Route::resource('user', UserController::class);
 
 // atau ini bebas dah
 Route::get('/pegawai', [PegawaiController::class, 'index']);
+
+
+Route::get('/penjual', [PenjualController::class, 'index']);
+Route::get('/product', [ProductController::class, 'index']);
+Route::get('/product_galleries', [Product_GalleriesController::class, 'index']);
+

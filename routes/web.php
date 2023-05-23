@@ -3,15 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SiswaController; //panggil controller yang ada dibuat sebelumnya
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\DivisiController;
-use App\Http\Controllers\GajiController;
-use App\Http\Controllers\JabatanController;
-use App\Http\Controllers\MateriController;
+use App\Http\Controllers\DetailTransaksiController;
 use App\Http\Controllers\PegawaiController;
-use App\Http\Controllers\PelatihanController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\UserController;
-use App\Models\DetailTransaksi;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,7 +42,7 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('index');
 
 // bisa make ini 
 Route::resource('transaksi', TransaksiController::class);
-Route::resource('detail_transaksi', DetailTransaksi::class);
+Route::resource('detail_transaksi', DetailTransaksiController::class);
 Route::resource('user', UserController::class);
 
 // atau ini bebas dah

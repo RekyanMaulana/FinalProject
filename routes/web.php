@@ -9,6 +9,9 @@ use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\MateriController;
 use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\PelatihanController;
+use App\Http\Controllers\TransaksiController;
+use App\Http\Controllers\UserController;
+use App\Models\DetailTransaksi;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,7 +46,9 @@ Route::get('/siswa', [SiswaController::class, 'dataSiswa']);
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('index');
 
 // bisa make ini 
-Route::resource('pegawai', PegawaiController::class);
+Route::resource('transaksi', TransaksiController::class);
+Route::resource('detail_transaksi', DetailTransaksi::class);
+Route::resource('user', UserController::class);
 
 // atau ini bebas dah
-// Route::get('/pegawai', [PegawaiController::class, 'index']);
+Route::get('/pegawai', [PegawaiController::class, 'index']);

@@ -34,7 +34,7 @@ class UserController extends Controller
             'password' => $request->password,
             'role' => $request->role,
         ]);
-        return redirect('user');
+        return redirect('admin/user');
     }
 
     /**

@@ -38,7 +38,7 @@ class TransaksiController extends Controller
             'tanggal' => $request->tanggal,
             'lokasi' => $request->lokasi,
         ]);
-        return redirect('transaksi');
+        return redirect('admin/transaksi');
     }
 
     /**

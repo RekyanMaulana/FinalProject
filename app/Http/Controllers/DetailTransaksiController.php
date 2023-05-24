@@ -37,7 +37,7 @@ class DetailTransaksiController extends Controller
             'transaksi_id' => $request->transaksi,
             'product_id' => $request->produk,
         ]);
-        return redirect('detail_transaksi');
+        return redirect('admin/detail_transaksi');
     }
 
     /**

@@ -2,19 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\PegawaiModel;
 use Illuminate\Http\Request;
+use App\Models\Penjual;
+use Illuminate\Support\Facades\DB;
 
-class PegawaiController extends Controller
+class PenjualController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $data = PegawaiModel::get();
-        // echo $data;
-        return view('admin.pegawai.index', compact('data'));
+        //
+        $penjual = DB::table('penjual')->get();
+        return view('admin.penjual.index', compact('penjual'));
     }
 
     /**
@@ -22,7 +23,8 @@ class PegawaiController extends Controller
      */
     public function create()
     {
-        //
+        //arahkan ke file create
+        return view('admin.penjual.create');
     }
 
     /**
@@ -31,6 +33,12 @@ class PegawaiController extends Controller
     public function store(Request $request)
     {
         //
+        DB::table('penjual')->insert([
+            'nama' => $request->nama,
+            'nama_toko' => $request->nama_toko,
+            'deskripsi_toko' => $request->deskripsi_toko
+        ]);
+        return redirect('admin/penjual');
     }
 
     /**

@@ -1,10 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\SiswaController; //panggil controller yang ada dibuat sebelumnya
-use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PenjualController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\Product_GalleriesController;
 use App\Http\Controllers\DetailTransaksiController;
-use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\UserController;
 
@@ -20,11 +20,27 @@ use App\Http\Controllers\UserController;
 */
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('index');
+Route::get('/', function () {
+    return view('welcome');
+});
+Route::prefix('admin')->group(function () {
 
-// bisa make ini 
-Route::resource('transaksi', TransaksiController::class);
-Route::resource('detail_transaksi', DetailTransaksiController::class);
-Route::resource('user', UserController::class);
+    Route::resource('transaksi', TransaksiController::class);
+    Route::resource('detail_transaksi', DetailTransaksiController::class);
+    Route::resource('user', UserController::class);
 
-// atau ini bebas dah
-Route::get('/pegawai', [PegawaiController::class, 'index']);
+    //Route Penjual
+    Route::get('/penjual', [PenjualController::class, 'index']);
+    Route::get('/penjual/create', [PenjualController::class, 'create']);
+    Route::post('/penjual/store', [PenjualController::class, 'store']);
+
+    //Route Product
+    Route::get('/product', [ProductController::class, 'index']);
+    Route::get('/product/create', [ProductController::class, 'create']);
+    Route::post('/product/store', [ProductController::class, 'store']);
+
+    //Route Product Galleries
+    Route::get('/product_galleries', [Product_GalleriesController::class, 'index']);
+    Route::get('/product_galleries/create', [Product_GalleriesController::class, 'create']);
+    Route::post('/product_galleries/store', [Product_GalleriesController::class, 'store']);
+});

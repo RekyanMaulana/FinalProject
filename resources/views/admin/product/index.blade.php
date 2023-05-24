@@ -15,7 +15,7 @@
                         </div>
                         <div class="card mb-4">
                             <div class="card-header">
-                                <a href="index.php?url=product_form" class="btn btn-primary btn-sm"> Tambah </a>
+                                <a href="{{url('admin/product/create')}}" class="btn btn-primary btn-sm"> Tambah </a>
                             </div>
                             <div class="card-body">
                                 <table id="datatablesSimple">
@@ -26,7 +26,7 @@
                                             <th>Jenis</th>
                                             <th>Price</th>
                                             <th>Stok</th>
-                                            <th>Penjual</th>
+                                            <th>Nama Toko</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -37,7 +37,7 @@
                                             <th>Jenis</th>
                                             <th>Price</th>
                                             <th>Stok</th>
-                                            <th>Penjual</th>
+                                            <th>Nama Toko</th>
                                             <th>Action</th>
                                         </tr>
                                     </tfoot>
@@ -52,7 +52,7 @@
                                             <td>{{$prod->jenis}}</td>
                                             <td>{{$prod->price}}</td>
                                             <td>{{$prod->stok}}</td>
-                                            <td>{{$prod->penjual}}</td>
+                                            <td>{{$prod->nama_toko}}</td>
                                             <td>
                                                 <form action="#" method="post">
                                                     <a class="btn btn-info btn-sm" href="#">Detail</a>

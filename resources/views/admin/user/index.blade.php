@@ -1,7 +1,7 @@
 @extends('admin.layout.appadmin')
 
 @section('content')
-<h1 class="mt-4">Product</h1>
+<h1 class="mt-4">User</h1>
 <ol class="breadcrumb mb-4">
     <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
     <li class="breadcrumb-item active">Product</li>
@@ -15,7 +15,7 @@
 </div>
 <div class="card mb-4">
     <div class="card-header">
-        <a href="index.php?url=productTambah" class="btn btn-primary btn-sm">Tambah</a>
+        <a href="{{route('user.create')}}" class="btn btn-primary btn-sm">Tambah</a>
     </div>
     <div class="card-body">
         <table id="datatablesSimple" width="100%">

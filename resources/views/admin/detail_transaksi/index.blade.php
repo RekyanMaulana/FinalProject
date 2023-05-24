@@ -15,7 +15,7 @@
 </div>
 <div class="card mb-4">
     <div class="card-header">
-        <a href="index.php?url=productTambah" class="btn btn-primary btn-sm">Tambah</a>
+        <a href="{{route('detail_transaksi.create')}}" class="btn btn-primary btn-sm">Tambah</a>
     </div>
     <div class="card-body">
         <table id="datatablesSimple" width="100%">

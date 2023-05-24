@@ -22,7 +22,9 @@ class DetailTransaksiController extends Controller
      */
     public function create()
     {
-        //
+        $transaksi = Transaksi::get();
+        $produk = DetailTransaksi::get();
+        return view('admin.detail_transaksi.create', compact('transaksi', 'produk'));
     }
 
     /**
@@ -30,7 +32,12 @@ class DetailTransaksiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        DetailTransaksi::create([
+            'quantity' => $request->quantity,
+            'transaksi_id' => $request->transaksi,
+            'product_id' => $request->produk,
+        ]);
+        return redirect('admin/detail_transaksi');
     }
 
     /**

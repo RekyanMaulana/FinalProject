@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Transaksi;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class TransaksiController extends Controller
@@ -21,7 +22,8 @@ class TransaksiController extends Controller
      */
     public function create()
     {
-        //
+        $user = User::get();
+        return view('admin.transaksi.create', compact('user'));
     }
 
     /**
@@ -29,7 +31,14 @@ class TransaksiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Transaksi::create([
+            'total_transaksi' => $request->total,
+            'status_transaksi' => 'Lunas',
+            'user_id' => $request->user,
+            'tanggal' => $request->tanggal,
+            'lokasi' => $request->lokasi,
+        ]);
+        return redirect('admin/transaksi');
     }
 
     /**

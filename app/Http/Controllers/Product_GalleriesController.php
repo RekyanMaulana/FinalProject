@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Product_Galleries;
-use DB;
+use Illuminate\Support\Facades\DB;
 
 class Product_GalleriesController extends Controller
 {
@@ -16,8 +16,8 @@ class Product_GalleriesController extends Controller
     {
         //
         $product_galleries = Product_Galleries::join('product', 'product_galleries.product_id', '=', 'product.id')
-        ->select('product_galleries.*', 'product.nama as product')
-        ->get();
+            ->select('product_galleries.*', 'product.nama as product')
+            ->get();
         return view('admin.product_galleries.index', compact('product_galleries'));
     }
 
@@ -29,8 +29,8 @@ class Product_GalleriesController extends Controller
         //
         $product = DB::table('product')->get();
         $product_galleries = Product_Galleries::join('product', 'product_galleries.product_id', '=', 'product.id')
-        ->select('product_galleries.*', 'product.nama as product')
-        ->get();
+            ->select('product_galleries.*', 'product.nama as product')
+            ->get();
         return view('admin.product_galleries.create', compact('product_galleries', 'product'));
     }
 
@@ -40,11 +40,10 @@ class Product_GalleriesController extends Controller
     public function store(Request $request)
     {
         //
-        if(!empty($request->foto)){
-            $fileName = 'foto-'.$request->id.'.'.$request->foto->extension();
+        if (!empty($request->foto)) {
+            $fileName = 'foto-' . $request->id . '.' . $request->foto->extension();
             $request->foto->move(public_path('admin/image'), $fileName);
-        }
-        else {
+        } else {
             $fileName = '';
         }
         DB::table('product_galleries')->insert([

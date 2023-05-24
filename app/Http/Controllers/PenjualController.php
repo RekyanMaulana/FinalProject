@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Penjual;
-use DB;
+use Illuminate\Support\Facades\DB;
 
 class PenjualController extends Controller
 {
@@ -34,9 +34,9 @@ class PenjualController extends Controller
     {
         //
         DB::table('penjual')->insert([
-            'nama' =>$request->nama,
-            'nama_toko' =>$request->nama_toko,
-            'deskripsi_toko' =>$request->deskripsi_toko
+            'nama' => $request->nama,
+            'nama_toko' => $request->nama_toko,
+            'deskripsi_toko' => $request->deskripsi_toko
         ]);
         return redirect('admin/penjual');
     }

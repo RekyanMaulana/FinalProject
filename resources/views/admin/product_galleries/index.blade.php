@@ -15,23 +15,23 @@
                         </div>
                         <div class="card mb-4">
                             <div class="card-header">
-                                <a href="index.php?url=product_form" class="btn btn-primary btn-sm"> Tambah </a>
+                                <a href="{{url('admin/product_galleries/create')}}" class="btn btn-primary btn-sm"> Tambah </a>
                             </div>
                             <div class="card-body">
                                 <table id="datatablesSimple">
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Foto</th>
                                             <th>Nama Produk</th>
+                                            <th>Foto</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
                                             <th>No</th>
-                                            <th>Foto</th>
                                             <th>Nama Produk</th>
+                                            <th>Foto</th>
                                             <th>Action</th>
                                         </tr>
                                     </tfoot>
@@ -42,8 +42,14 @@
                                         @foreach($product_galleries as $pg)
                                         <tr>
                                             <td>{{$no}}</td>
-                                            <td>{{$pg->foto}}</td>
                                             <td>{{$pg->product}}</td>
+                                            <td>
+                                                @empty($pg->foto)
+                                                <img src="{{url('admin/image/nophoto.png')}}" width="30%">
+                                                @else
+                                                <img src="{{url('admin/image')}}/{{$pg->foto}}" width="30%">
+                                                @endempty
+                                            </td>
                                             <td>
                                                 <form action="#" method="post">
                                                     <a class="btn btn-info btn-sm" href="#">Detail</a>

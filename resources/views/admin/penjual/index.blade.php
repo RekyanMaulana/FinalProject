@@ -15,7 +15,7 @@
                         </div>
                         <div class="card mb-4">
                             <div class="card-header">
-                                <a href="index.php?url=product_form" class="btn btn-primary btn-sm"> Tambah </a>
+                                <a href="{{url('admin/penjual/create')}}" class="btn btn-primary btn-sm"> Tambah </a>
                             </div>
                             <div class="card-body">
                                 <table id="datatablesSimple">

@@ -23,7 +23,8 @@ class PenjualController extends Controller
      */
     public function create()
     {
-        //
+        //arahkan ke file create
+        return view('admin.penjual.create');
     }
 
     /**
@@ -32,6 +33,12 @@ class PenjualController extends Controller
     public function store(Request $request)
     {
         //
+        DB::table('penjual')->insert([
+            'nama' =>$request->nama,
+            'nama_toko' =>$request->nama_toko,
+            'deskripsi_toko' =>$request->deskripsi_toko
+        ]);
+        return redirect('admin/penjual');
     }
 
     /**

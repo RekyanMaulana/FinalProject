@@ -25,10 +25,11 @@
                                             <th>Nama</th>
                                             <th>Nama Toko</th>
                                             <th>Deskripsi Toko</th>
+                                            <th>Rating</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
-                                    <tfoot>
+                                    <!-- <tfoot>
                                         <tr>
                                             <th>No</th>
                                             <th>Nama</th>
@@ -36,7 +37,7 @@
                                             <th>Deskripsi Toko</th>
                                             <th>Action</th>
                                         </tr>
-                                    </tfoot>
+                                    </tfoot> -->
                                     <tbody>
                                         @php
                                         $no = 1;
@@ -47,6 +48,7 @@
                                             <td>{{$pjl->nama}}</td>
                                             <td>{{$pjl->nama_toko}}</td>
                                             <td>{{$pjl->deskripsi_toko}}</td>
+                                            <td>@include('admin.penjual.rating')</td>
                                             <td>
                                                 <form action="#" method="post">
                                                     <a class="btn btn-info btn-sm" href="#">Detail</a>

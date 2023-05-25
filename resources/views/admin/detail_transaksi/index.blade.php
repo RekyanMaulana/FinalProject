@@ -35,11 +35,11 @@
                     <td>{{ $data->product->nama}}</td>
                     <td>{{ $data->quantity}}</td>
                     <td>
-                        <form action="controller/productController.php" method="POST">
+                        <form action="{{route('detail_transaksi.destroy',$data->id)}}" method="POST">
                             @csrf
                             @method('DELETE')
                             <a class="btn btn-info btn-sm">Detail</a>
-                            <a class="btn btn-warning btn-sm">Ubah</a>
+                            <a class="btn btn-warning btn-sm" href="{{route('detail_transaksi.edit',$data->id)}}">Ubah</a>
                             <button type="submit" name="proses" value="hapus" class="btn btn-danger btn-sm" onclick="return alert('Apakah anda yakin akan menghapus data ini?')">Hapus</button>
                         </form>
                     </td>

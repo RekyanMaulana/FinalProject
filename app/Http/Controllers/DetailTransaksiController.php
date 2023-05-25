@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\DetailTransaksi;
+use App\Models\Product;
 use App\Models\Transaksi;
 use Illuminate\Http\Request;
 
@@ -23,7 +24,7 @@ class DetailTransaksiController extends Controller
     public function create()
     {
         $transaksi = Transaksi::get();
-        $produk = DetailTransaksi::get();
+        $produk = Product::get();
         return view('admin.detail_transaksi.create', compact('transaksi', 'produk'));
     }
 
@@ -53,7 +54,10 @@ class DetailTransaksiController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $transaksi = Transaksi::get();
+        $produk = Product::get();
+        $detail = DetailTransaksi::find($id);
+        return view('admin.detail_transaksi.update', compact('transaksi', 'produk', 'detail'));
     }
 
     /**
@@ -61,7 +65,12 @@ class DetailTransaksiController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        DetailTransaksi::where('id', $id)->update([
+            'quantity' => $request->quantity,
+            'transaksi_id' => $request->transaksi,
+            'product_id' => $request->produk,
+        ]);
+        return redirect('admin/detail_transaksi');
     }
 
     /**
@@ -69,6 +78,8 @@ class DetailTransaksiController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $detail = DetailTransaksi::find($id);
+        $detail->delete();
+        return redirect('admin/detail_transaksi');
     }
 }

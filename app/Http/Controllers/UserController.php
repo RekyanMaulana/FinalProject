@@ -50,7 +50,8 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $user = User::find($id);
+        return view('admin.user.update', compact('user'));
     }
 
     /**
@@ -58,7 +59,11 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        User::where('id', $id)->update([
+            'username' => $request->username,
+            'role' => $request->role,
+        ]);
+        return redirect('admin/user');
     }
 
     /**
@@ -66,6 +71,8 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $user = User::find($id);
+        $user->delete();
+        return redirect('admin/user');
     }
 }

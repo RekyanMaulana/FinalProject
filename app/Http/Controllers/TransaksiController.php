@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DetailTransaksi;
 use App\Models\Transaksi;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -54,7 +55,9 @@ class TransaksiController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $transaksi = Transaksi::find($id);
+        $user = User::get();
+        return view('admin.transaksi.update', compact('transaksi', 'user'));
     }
 
     /**
@@ -62,7 +65,13 @@ class TransaksiController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        Transaksi::where('id', $id)->update([
+            'total_transaksi' => $request->total,
+            'user_id' => $request->user,
+            'tanggal' => $request->tanggal,
+            'lokasi' => $request->lokasi,
+        ]);
+        return redirect('admin/transaksi');
     }
 
     /**
@@ -70,6 +79,9 @@ class TransaksiController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $transaksi = Transaksi::find($id);
+        $detail = DetailTransaksi::where('transaksi_id', $id)->delete();
+        $transaksi->delete();
+        return redirect('admin/transaksi');
     }
 }

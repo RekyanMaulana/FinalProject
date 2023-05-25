@@ -36,7 +36,7 @@ class PenjualController extends Controller
         DB::table('penjual')->insert([
             'nama' =>$request->nama,
             'nama_toko' =>$request->nama_toko,
-            'deskripsi_toko' =>$request->deskripsi_toko
+            'deskripsi_toko' =>$request->deskripsi_toko,
         ]);
         return redirect('admin/penjual');
     }
@@ -55,14 +55,24 @@ class PenjualController extends Controller
     public function edit(string $id)
     {
         //
+        $penjual = DB::table('penjual')->where('id', $id)->get();
+
+        return view('admin.penjual.edit', compact('penjual'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
         //
+        DB::table('penjual')->where('id', $request->id)->update([
+            'nama' =>$request->nama,
+            'nama_toko' =>$request->nama_toko,
+            'deskripsi_toko' =>$request->deskripsi_toko,
+        ]);
+
+        return redirect('admin/penjual');
     }
 
     /**

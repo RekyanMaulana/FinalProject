@@ -64,14 +64,26 @@ class ProductController extends Controller
     public function edit(string $id)
     {
         //
+        $penjual = DB::table('penjual')->get();
+        $product = DB::table('product')->where('id', $id)->get();
+
+        return view('admin.product.edit', compact('product', 'penjual'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
         //
+        DB::table('product')->where('id', $request->id)->update([
+            'nama' => $request->nama,
+            'jenis' => $request->jenis,
+            'price' => $request->price,
+            'stok' => $request->stok,
+            'penjual_id' => $request->penjual_id,
+        ]);
+        return redirect('admin/product');
     }
 
     /**

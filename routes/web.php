@@ -25,11 +25,15 @@ Route::prefix('admin')->group(function(){
 Route::get('/penjual', [PenjualController::class, 'index']);
 Route::get('/penjual/create', [PenjualController::class, 'create']);
 Route::post('/penjual/store', [PenjualController::class, 'store']);
+Route::get('/penjual/edit/{id}', [PenjualController::class, 'edit']);
+Route::post('/penjual/update', [PenjualController::class, 'update']);
 
 //Route Product
 Route::get('/product', [ProductController::class, 'index']);
 Route::get('/product/create', [ProductController::class, 'create']);
 Route::post('/product/store', [ProductController::class, 'store']);
+Route::get('/product/edit/{id}', [ProductController::class, 'edit']);
+Route::post('/product/update', [ProductController::class, 'update']);
 
 //Route Product Galleries
 Route::get('/product_galleries', [Product_GalleriesController::class, 'index']);

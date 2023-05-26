@@ -49,7 +49,7 @@
                                             <td>{{$pjl->deskripsi_toko}}</td>
                                             <td>
                                                 <form action="#" method="post">
-                                                    <a class="btn btn-info btn-sm" href="#">Detail</a>
+                                                    <a class="btn btn-info btn-sm" href="{{url('admin/penjual/show/'.$pjl->id)}}">Detail</a>
                                                     <a class="btn btn-warning btn-sm" href="{{url('admin/penjual/edit/'.$pjl->id)}}">Ubah</a>
                                                     <button type="submit" class="btn btn-danger btn-sm" name="proses" value="hapus"
                                                     onclick="return confirm('Anda yakin data ini akan dihapus?')">Hapus</button>

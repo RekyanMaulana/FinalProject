@@ -47,6 +47,9 @@ class PenjualController extends Controller
     public function show(string $id)
     {
         //
+        $penjual = DB::table('penjual')->where('id', $id)->get();
+        
+        return view('admin.penjual.detail', compact('penjual'));
     }
 
     /**

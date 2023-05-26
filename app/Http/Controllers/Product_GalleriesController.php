@@ -68,14 +68,30 @@ class Product_GalleriesController extends Controller
     public function edit(string $id)
     {
         //
+        $product = DB::table('product')->get();
+        $product_galleries = DB::table('product_galleries')->where('id', $id)->get();
+
+        return view('admin.product_galleries.edit', compact('product_galleries', 'product'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
         //
+        if(!empty($request->foto)){
+            $fileName = 'foto-'.$request->id.'.'.$request->foto->extension();
+            $request->foto->move(public_path('admin/image'), $fileName);
+        }
+        else {
+            $fileName = '';
+        }
+        DB::table('product_galleries')->where('id', $request->id)->update([
+            'foto' => $fileName,
+            'product_id' => $request->product_id,
+        ]);
+        return redirect('admin/product_galleries');
     }
 
     /**

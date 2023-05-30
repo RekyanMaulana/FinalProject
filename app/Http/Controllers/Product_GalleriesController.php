@@ -60,6 +60,12 @@ class Product_GalleriesController extends Controller
     public function show(string $id)
     {
         //
+        $product_galleries = Product_Galleries::join('product', 'product_galleries.product_id', '=', 'product.id')
+        ->select('product_galleries.*', 'product.nama as product', 'product.jenis as jp', 'product.price as harga', 'product.stok as stok')
+        ->where('product_galleries.id', $id)
+        ->get();
+
+        return view ('admin.product_galleries.detail', compact('product_galleries'));
     }
 
     /**
@@ -100,5 +106,7 @@ class Product_GalleriesController extends Controller
     public function destroy(string $id)
     {
         //
+        DB::table('product_galleries')->where('id', $id)->delete();
+        return redirect('admin/product_galleries');
     }
 }

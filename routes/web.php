@@ -42,6 +42,8 @@ Route::get('/product_galleries/create', [Product_GalleriesController::class, 'cr
 Route::post('/product_galleries/store', [Product_GalleriesController::class, 'store']);
 Route::get('/product_galleries/edit/{id}', [Product_GalleriesController::class, 'edit']);
 Route::post('/product_galleries/update', [Product_GalleriesController::class, 'update']);
+Route::get('/product_galleries/show/{id}', [Product_GalleriesController::class, 'show']);
+Route::get('/product_galleries/delete/{id}', [Product_GalleriesController::class, 'destroy']);
 
 
 });

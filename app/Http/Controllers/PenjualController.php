@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Penjual;
 use DB;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PenjualController extends Controller
 {
@@ -38,6 +39,7 @@ class PenjualController extends Controller
             'nama_toko' =>$request->nama_toko,
             'deskripsi_toko' =>$request->deskripsi_toko,
         ]);
+        Alert::success('Penjual', 'Berhasil Menambahkan Penjual');
         return redirect('admin/penjual');
     }
 
@@ -74,6 +76,7 @@ class PenjualController extends Controller
             'nama_toko' =>$request->nama_toko,
             'deskripsi_toko' =>$request->deskripsi_toko,
         ]);
+        Alert::info('Penjual', 'Berhasil Mengedit Penjual');
 
         return redirect('admin/penjual');
     }

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PenjualController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Product_GalleriesController;
@@ -20,6 +21,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::prefix('admin')->group(function(){
+
+Route::get('/dashboard', [DashboardController::class, 'index']); 
 
 //Route Penjual
 Route::get('/penjual', [PenjualController::class, 'index']);

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Penjual;
 use App\Models\Product;
 use DB;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ProductController extends Controller
 {
@@ -47,6 +48,7 @@ class ProductController extends Controller
             'stok' => $request->stok,
             'penjual_id' => $request->penjual_id,
         ]);
+        Alert::success('Produk', 'Berhasil Menambahkan Produk');
         return redirect('admin/product');
     }
 
@@ -83,6 +85,7 @@ class ProductController extends Controller
             'stok' => $request->stok,
             'penjual_id' => $request->penjual_id,
         ]);
+        Alert::info('Produk', 'Berhasil Mengedit Produk');
         return redirect('admin/product');
     }
 

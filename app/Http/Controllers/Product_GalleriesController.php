@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Product_Galleries;
 use DB;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class Product_GalleriesController extends Controller
 {
@@ -51,6 +52,7 @@ class Product_GalleriesController extends Controller
             'foto' => $fileName,
             'product_id' => $request->product_id,
         ]);
+        Alert::success('Galleri', 'Berhasil Menambahkan Foto');
         return redirect('admin/product_galleries');
     }
 
@@ -97,6 +99,7 @@ class Product_GalleriesController extends Controller
             'foto' => $fileName,
             'product_id' => $request->product_id,
         ]);
+        Alert::info('Galleri', 'Berhasil Mengedit Foto');
         return redirect('admin/product_galleries');
     }
 

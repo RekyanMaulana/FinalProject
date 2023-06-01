@@ -3,6 +3,7 @@
 <div id="layoutSidenav_content">
     <main>
         <div class="container-fluid px-4">
+        @include('sweetalert::alert')
         @yield('content')
         </div>
     </main>

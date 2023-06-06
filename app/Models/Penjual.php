@@ -11,10 +11,16 @@ class Penjual extends Model
     protected $table = 'penjual';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'nama', 'nama_toko', 'deskripsi_toko'
+        'user_id', 'nama_toko', 'deskripsi_toko'
     ];
 
-    public function product(){
+    public function product()
+    {
         return $this->hasMany(Product::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

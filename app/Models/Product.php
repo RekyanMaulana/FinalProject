@@ -14,10 +14,13 @@ class Product extends Model
         'nama', 'jenis', 'price', 'stok', 'penjual_id'
     ];
 
-    public function product_galleries(){
+    public function product_galleries()
+    {
         return $this->hasMany(Product_Galleries::class);
     }
-    public function penjual(){
-        return $this->belongsTO(Penjual::class);
+
+    public function penjual()
+    {
+        return $this->belongsTo(Penjual::class);
     }
 }

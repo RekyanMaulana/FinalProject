@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Penjual;
-use Illuminate\Support\Facades\DB;
+use App\Models\Profile;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class PenjualController extends Controller
 {
@@ -13,9 +15,9 @@ class PenjualController extends Controller
      */
     public function index()
     {
-        //
-        $penjual = DB::table('penjual')->get();
-        return view('admin.penjual.index', compact('penjual'));
+        $title = "Data Penjual";
+        $data = User::whereNot('role', 'Admin')->orderBy('created_at', 'desc')->get();
+        return view('pages-admin.user.index', compact('title', 'data'));
     }
 
     /**
@@ -23,8 +25,8 @@ class PenjualController extends Controller
      */
     public function create()
     {
-        //arahkan ke file create
-        return view('admin.penjual.create');
+        $title = 'Data User';
+        return view('pages-admin.user.create', compact('title'));
     }
 
     /**
@@ -32,13 +34,37 @@ class PenjualController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        DB::table('penjual')->insert([
-            'nama' => $request->nama,
-            'nama_toko' => $request->nama_toko,
-            'deskripsi_toko' => $request->deskripsi_toko
+        $request->validate([
+            'nama' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'username' => ['required', 'string', 'max:255', 'unique:users'],
         ]);
-        return redirect('admin/penjual');
+
+        $id = mt_rand(1000, 99999);
+        $user = User::create([
+            'id' => $id,
+            'email' => $request->email,
+            'username' => $request->username,
+            'password' => Hash::make($request->password),
+            'role' => 'Penjual',
+        ]);
+
+        Penjual::create([
+            'user_id' => $id,
+            'nama_toko' => $request->nama_toko,
+            'deskripsi_toko' => $request->deskripsi_toko,
+        ]);
+
+
+        Profile::create([
+            'nama' => $request->nama,
+            'no_telp' => $request->no_telp,
+            'alamat' => null,
+            'foto' => 'avatar4.png',
+            'user_id' => $id
+        ]);
+
+        return redirect('penjual')->with('success', 'Data User berhasil ditambahkan');
     }
 
     /**
@@ -54,7 +80,9 @@ class PenjualController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $title = 'Edit Data Penjual';
+        $data = User::find($id);
+        return view('pages-admin.user.update', compact('title', 'data'));
     }
 
     /**
@@ -62,7 +90,30 @@ class PenjualController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'nama' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255'],
+            'username' => ['required', 'string', 'max:255'],
+        ]);
+
+        $user = User::where('id', $id)->update([
+            'id' => $id,
+            'email' => $request->email,
+            'username' => $request->username,
+        ]);
+
+        Penjual::where('user_id', $id)->update([
+            'nama_toko' => $request->nama_toko,
+            'deskripsi_toko' => $request->deskripsi_toko,
+        ]);
+
+
+        Profile::where('user_id', $id)->update([
+            'nama' => $request->nama,
+            'no_telp' => $request->no_telp,
+        ]);
+
+        return redirect('penjual')->with('success', 'Data User berhasil Diedit');
     }
 
     /**
@@ -70,6 +121,8 @@ class PenjualController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $user = User::find($id);
+        $user->delete();
+        return redirect('penjual')->with('success', 'Data User berhasil Dihapus');
     }
 }

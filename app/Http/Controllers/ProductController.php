@@ -3,9 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Penjual;
-use App\Models\Product;
-use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -14,11 +11,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //arahkan ke view
-        $product = Product::join('penjual', 'product.penjual_id', '=', 'penjual.id')
-        ->select('product.*', 'penjual.nama_toko as nama_toko')
-        ->get();
-        return view('admin.product.index', compact('product'));
+        //
     }
 
     /**
@@ -26,12 +19,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //arahkan ke file create
-        $penjual = DB::table('penjual')->get();
-        $product = Product::join('penjual', 'product.penjual_id', '=', 'penjual.id')
-        ->select('product.*', 'penjual.nama as penjual')
-        ->get();
-        return view('admin.product.create', compact('product', 'penjual'));
+        //
     }
 
     /**
@@ -40,14 +28,6 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         //
-        DB::table('product')->insert([
-            'nama' => $request->nama,
-            'jenis' => $request->jenis,
-            'price' => $request->price,
-            'stok' => $request->stok,
-            'penjual_id' => $request->penjual_id,
-        ]);
-        return redirect('admin/product');
     }
 
     /**
@@ -55,7 +35,6 @@ class ProductController extends Controller
      */
     public function show(string $id)
     {
-        //
     }
 
     /**
@@ -80,5 +59,17 @@ class ProductController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function detail_produk(string $id)
+    {
+        $title = "Detail Produk";
+        return view('pages-user.shop', compact('title'));
+    }
+
+    public function katalog_produk()
+    {
+        $title = "Produk";
+        return view('pages-user.produk', compact('title'));
     }
 }

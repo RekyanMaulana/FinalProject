@@ -23,4 +23,9 @@ class DetailTransaksi extends Model
     {
         return $this->belongsTo(Product::class);
     }
+
+    public function ratings()
+    {
+        return $this->hasOne(Ratings::class);
+    }
 }

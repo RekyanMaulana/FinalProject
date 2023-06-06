@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"> 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<br>
+<h1>Form Edit Penjual</h1>
 <br>
 @foreach($penjual as $pjl)
 <form method="POST" action="{{url('admin/penjual/update')}}" enctype="multipart/form-data">
@@ -13,13 +13,23 @@
     <input type="hidden" name="id" value="{{$pjl->id}}"><br>
     <label for="text" class="col-4 col-form-label">Nama Penjual</label> 
     <div class="col-8">
-      <input id="text" name="nama" type="text" class="form-control" value="{{$pjl->nama}}">
+      <input id="text" name="nama" type="text" class="form-control @error('nama') is-invalid @enderror" value="{{$pjl->nama}}">
+      @error('nama')
+      <div class="invalid-feedback">
+        {{$message}}
+      </div>
+      @enderror
     </div>
   </div>
   <div class="form-group row">
     <label for="text1" class="col-4 col-form-label">Nama Toko</label> 
     <div class="col-8">
-      <input id="text1" name="nama_toko" type="text" class="form-control" value="{{$pjl->nama_toko}}">
+      <input id="text1" name="nama_toko" type="text" class="form-control @error('nama_toko') is-invalid @enderror" value="{{$pjl->nama_toko}}">
+      @error('nama_toko')
+      <div class="invalid-feedback">
+        {{$message}}
+      </div>
+      @enderror
     </div>
   </div>
   <div class="form-group row">

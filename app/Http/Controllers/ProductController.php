@@ -40,6 +40,20 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'nama' => 'required',
+            'jenis' => 'required',
+            'price' => 'required',
+            'stok' => 'required',
+            'penjual_id' => 'required|integer',
+        ],
+        [
+            'nama.required' => 'Nama product wajib diisi',
+            'jenis.required' => 'Jenis product wajib diisi',
+            'price.required' => 'Harga product wajib diisi',
+            'stok.required' => 'Stok product wajib diisi',
+            'penjual_id.required' => 'Nama toko wajib diisi',
+        ]);
         //
         DB::table('product')->insert([
             'nama' => $request->nama,
@@ -68,8 +82,9 @@ class ProductController extends Controller
         //
         $penjual = DB::table('penjual')->get();
         $product = DB::table('product')->where('id', $id)->get();
+        $ar_jenis = ['Makanan', 'Minuman'];
 
-        return view('admin.product.edit', compact('product', 'penjual'));
+        return view('admin.product.edit', compact('product', 'penjual', 'ar_jenis'));
     }
 
     /**
@@ -77,6 +92,13 @@ class ProductController extends Controller
      */
     public function update(Request $request)
     {
+        $request->validate([
+            'nama' => 'required',
+            'jenis' => 'required',
+            'price' => 'required',
+            'stok' => 'required',
+            'penjual_id' => 'required|integer',
+        ]);
         //
         DB::table('product')->where('id', $request->id)->update([
             'nama' => $request->nama,

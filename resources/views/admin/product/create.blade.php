@@ -11,28 +11,47 @@
   <div class="form-group row">
     <label for="text" class="col-4 col-form-label">Nama Produk</label> 
     <div class="col-8">
-      <input id="text" name="nama" type="text" class="form-control">
+      <input id="text" name="nama" type="text" class="form-control @error('nama') is-invalid @enderror" placeholder="Masukkan Nama Product">
+      @error('nama')
+      <div class="invalid-feedback">
+        {{$message}}
+      </div>
+      @enderror
     </div>
   </div>
   <div class="form-group row">
     <label for="select" class="col-4 col-form-label">Jenis Produk</label> 
     <div class="col-8">
-      <select id="select" name="jenis" class="custom-select">
-        <option value="Makanan">Makanan</option>
-        <option value="Minuman">Minuman</option>
-      </select>
+    <div class="custom-control custom-radio custom-control-inline">
+        <input name="jenis" id="radio_0" type="radio" class="custom-control-input" value="Makanan"> 
+        <label for="radio_0" class="custom-control-label">Makanan</label>
+      </div>
+      <div class="custom-control custom-radio custom-control-inline">
+        <input name="jenis" id="radio_1" type="radio" class="custom-control-input" value="Minuman"> 
+        <label for="radio_1" class="custom-control-label">Minuman</label>
+      </div>
     </div>
   </div>
   <div class="form-group row">
     <label for="text1" class="col-4 col-form-label">Harga</label> 
     <div class="col-8">
-      <input id="text1" name="price" type="text" class="form-control">
+      <input id="text1" name="price" type="text" class="form-control @error('price') is-invalid @enderror" placeholder="Masukkan Harga">
+      @error('price')
+      <div class="invalid-feedback">
+        {{$message}}
+      </div>
+      @enderror
     </div>
   </div>
   <div class="form-group row">
     <label for="text2" class="col-4 col-form-label">Stok</label> 
     <div class="col-8">
-      <input id="text2" name="stok" type="number" class="form-control">
+      <input id="text2" name="stok" type="number" class="form-control @error('stok') is-invalid @enderror" placeholder="Masukkan Jumlah Stok">
+      @error('stok')
+      <div class="invalid-feedback">
+        {{$message}}
+      </div>
+      @enderror
     </div>
   </div>
   <div class="form-group row">

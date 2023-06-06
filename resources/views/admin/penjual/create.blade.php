@@ -11,13 +11,23 @@
   <div class="form-group row">
     <label for="text" class="col-4 col-form-label">Nama Penjual</label> 
     <div class="col-8">
-      <input id="text" name="nama" type="text" class="form-control" placeholder="Masukkan Nama Penjual">
+      <input id="text" name="nama" type="text" class="form-control @error('nama') is-invalid @enderror" placeholder="Masukkan Nama Penjual">
+      @error('nama')
+      <div class="invalid-feedback">
+        {{$message}}
+      </div>
+      @enderror
     </div>
   </div>
   <div class="form-group row">
     <label for="text1" class="col-4 col-form-label">Nama Toko</label> 
     <div class="col-8">
-      <input id="text1" name="nama_toko" type="text" class="form-control" placeholder="Masukkan Nama Toko">
+      <input id="text1" name="nama_toko" type="text" class="form-control @error('nama_toko') is-invalid @enderror" placeholder="Masukkan Nama Toko">
+      @error('nama_toko')
+      <div class="invalid-feedback">
+        {{$message}}
+      </div>
+      @enderror
     </div>
   </div>
   <div class="form-group row">

@@ -33,6 +33,15 @@ class PenjualController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'nama' => 'required',
+            'nama_toko' => 'required',
+            'deskripsi_toko' => 'nullable',
+        ],
+        [
+            'nama.required' => 'Nama wajib diisi',
+            'nama_toko.required' => 'Nama toko wajib diisi',
+        ]);
         //
         DB::table('penjual')->insert([
             'nama' =>$request->nama,
@@ -70,6 +79,11 @@ class PenjualController extends Controller
      */
     public function update(Request $request)
     {
+        $request->validate([
+            'nama' => 'required',
+            'nama_toko' => 'required',
+            'deskripsi_toko' => 'nullable',
+        ]);
         //
         DB::table('penjual')->where('id', $request->id)->update([
             'nama' =>$request->nama,

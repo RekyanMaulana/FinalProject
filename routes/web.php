@@ -4,6 +4,7 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\FavoritController;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\HomeAdminController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HomePenjualController;
 use App\Http\Controllers\KatalogProdukController;
 use App\Http\Controllers\PenjualController;
@@ -70,6 +71,7 @@ Route::group(['middleware' => ['auth', 'role:Penjual']], function () {
         Route::post('/store', [ProductController::class, 'store'])->name('produk-store');
         Route::put('/{id}/update', [ProductController::class, 'update'])->name('produk-update');
         Route::delete('/{id}/destroy', [ProductController::class, 'destroy'])->name('produk-hapus');
+        Route::get('/hapus_gallery/{id}', [ProductController::class, 'hapus_gallery'])->name('hapus_gallery');
     });
 
 
@@ -86,7 +88,7 @@ Route::group(['middleware' => ['auth', 'role:Penjual']], function () {
 
 
 // menu yang dapat di akses hanya user dengan role User
-Route::group(['middleware' => ['auth', 'role:User']], function () {
+Route::group(['middleware' => ['auth', 'role:Siswa']], function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
 
     Route::prefix('favorit')->group(function () {

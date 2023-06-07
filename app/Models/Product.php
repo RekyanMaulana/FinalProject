@@ -9,9 +9,8 @@ class Product extends Model
 {
     use HasFactory;
     protected $table = 'product';
-    protected $primaryKey = 'id';
     protected $fillable = [
-        'nama', 'jenis', 'price', 'stok', 'penjual_id'
+        'id', 'nama', 'jenis', 'price', 'stok', 'deskripsi_barang', 'penjual_id'
     ];
 
     public function product_galleries()

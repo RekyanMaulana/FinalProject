@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DetailTransaksi;
+use App\Models\Transaksi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class TransaksiController extends Controller
 {
@@ -11,7 +15,35 @@ class TransaksiController extends Controller
      */
     public function index()
     {
-        //
+        $title = 'Manajemen Transaksi';
+        $diproses = Transaksi::with('detail_transaksi.product')
+            ->join('users', 'transaksi.user_id', '=', 'users.id')
+            ->join('profile', 'users.id', '=', 'profile.user_id')
+            ->whereHas('detail_transaksi.product', function ($query) {
+                $query->where('penjual_id', Auth::user()->penjual->id);
+            })
+            ->where('transaksi.status', 'Diproses')
+            ->orderBy('transaksi.created_at', 'desc')
+            ->get();
+        $dikirim = Transaksi::with('detail_transaksi.product')
+            ->join('users', 'transaksi.user_id', '=', 'users.id')
+            ->join('profile', 'users.id', '=', 'profile.user_id')
+            ->whereHas('detail_transaksi.product', function ($query) {
+                $query->where('penjual_id', Auth::user()->penjual->id);
+            })
+            ->where('transaksi.status', 'Dikirim')
+            ->orderBy('transaksi.created_at', 'desc')
+            ->get();
+        $diterima = Transaksi::with('detail_transaksi.product')
+            ->join('users', 'transaksi.user_id', '=', 'users.id')
+            ->join('profile', 'users.id', '=', 'profile.user_id')
+            ->whereHas('detail_transaksi.product', function ($query) {
+                $query->where('penjual_id', Auth::user()->penjual->id);
+            })
+            ->where('transaksi.status', 'Diterima')
+            ->orderBy('transaksi.created_at', 'desc')
+            ->get();
+        return view('pages-penjual.transaksi.index', compact('title', 'diproses', 'dikirim', 'diterima'));
     }
 
     /**

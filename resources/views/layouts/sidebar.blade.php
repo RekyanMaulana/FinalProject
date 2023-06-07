@@ -68,8 +68,8 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="{{url('product')}}" class="nav-link {{($title == 'Data Produk' || $title == 'Edit Data Produk') ? 'active' : '' }}">
-                        <i class="fas fa-box"></i>
+                    <a href="{{url('produk')}}" class="nav-link {{($title == 'Data Produk' || $title == 'Edit Data Produk') ? 'active' : '' }}">
+                        <i class="fas fa-utensils"></i>
                         <p>
                             &nbsp;&nbsp; Produk
                         </p>

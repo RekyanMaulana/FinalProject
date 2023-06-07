@@ -17,7 +17,7 @@
     <div class="col-span-3">
         <div class="px-4 py-3 shadow flex items-center gap-4">
             <div class="flex-shrink-0">
-                <img src="{{url('assets/user/assets/images/avatar.png')}}" alt="profile" class="rounded-full w-14 h-14 border border-gray-200 p-1 object-cover">
+                <img src="{{url('assets/user/images/avatar.png')}}" alt="profile" class="rounded-full w-14 h-14 border border-gray-200 p-1 object-cover">
             </div>
             <div class="flex-grow">
                 <p class="text-gray-600">Hello,</p>
@@ -86,7 +86,7 @@
     <div class="col-span-9 space-y-4">
         <div class="flex items-center justify-between border gap-6 p-4 border-gray-200 rounded">
             <div class="w-28">
-                <img src="{{url('assets/user/assets/images/products/makanan1.jpeg')}}" alt="product 6" style="height: 80px;" class="w-full">
+                <img src="{{url('assets/user/images/products/makanan1.jpeg')}}" alt="product 6" style="height: 80px;" class="w-full">
             </div>
             <div class="w-1/3">
                 <h2 class="text-gray-800 text-xl font-medium uppercase">Italian L shape</h2>
@@ -103,7 +103,7 @@
 
         <div class="flex items-center justify-between border gap-6 p-4 border-gray-200 rounded">
             <div class="w-28">
-                <img src="{{url('assets/user/assets/images/products/makanan2.jpeg')}}" alt="product 6" style="height: 80px;" class="w-full">
+                <img src="{{url('assets/user/images/products/makanan2.jpeg')}}" alt="product 6" style="height: 80px;" class="w-full">
             </div>
             <div class="w-1/3">
                 <h2 class="text-gray-800 text-xl font-medium uppercase">Dining Table</h2>
@@ -120,7 +120,7 @@
 
         <div class="flex items-center justify-between border gap-6 p-4 border-gray-200 rounded">
             <div class="w-28">
-                <img src="{{url('assets/user/assets/images/products/makanan3.jpeg')}}" alt="product 6" style="height: 80px;" class="w-full">
+                <img src="{{url('assets/user/images/products/makanan3.jpeg')}}" alt="product 6" style="height: 80px;" class="w-full">
             </div>
             <div class="w-1/3">
                 <h2 class="text-gray-800 text-xl font-medium uppercase">Sofa</h2>

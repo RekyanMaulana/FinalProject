@@ -88,16 +88,6 @@
     </div>
     <!-- ./wrapper -->
 
-    @if (count($errors) > 0)
-    <script>
-        Swal.fire({
-            icon: 'error',
-            title: 'Oppss, ada yang salah dengan request Anda',
-            showConfirmButton: true,
-            timer: 1500
-        })
-    </script>
-    @endif
     <script>
         function notif(icon, title) {
             Swal.fire({

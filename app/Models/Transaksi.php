@@ -11,7 +11,7 @@ class Transaksi extends Model
     protected $table = 'transaksi';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'total_transaksi', 'status_transaksi', 'user_id', 'tanggal', 'lokasi'
+        'total', 'status_transaksi', 'status', 'user_id', 'tanggal', 'lokasi'
     ];
 
     public function user()

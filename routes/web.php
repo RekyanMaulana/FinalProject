@@ -38,6 +38,9 @@ Route::get('/product/create', [ProductController::class, 'create']);
 Route::post('/product/store', [ProductController::class, 'store']);
 Route::get('/product/edit/{id}', [ProductController::class, 'edit']);
 Route::post('/product/update', [ProductController::class, 'update']);
+Route::get('/product/productPDF', [ProductController::class, 'productPDF']);
+Route::get('/product/exportexcel/', [ProductController::class, 'exportExcel']);
+Route::post('/product/importexcel/', [ProductController::class, 'importExcel']);
 
 //Route Product Galleries
 Route::get('/product_galleries', [Product_GalleriesController::class, 'index']);

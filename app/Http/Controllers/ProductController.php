@@ -1,12 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Models\Penjual;
 use App\Models\Product;
 use DB;
 use RealRashid\SweetAlert\Facades\Alert;
+use PDF;
+use App\Exports\ProductExport;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\ProductImport;
 
 class ProductController extends Controller
 {
@@ -117,5 +120,23 @@ class ProductController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+    public function productPDF(){
+        $product = Product::all();
+        
+        $pdf = PDF::loadView('admin.product.productPDF', ['product' => $product])->setPaper('a4', 'landscape');
+        // return $pdf->download('data_pegawai.pdf');
+        return $pdf->stream();
+    }
+    public function exportExcel() 
+    {
+        return Excel::download(new ProductExport, 'product.xlsx');
+    }
+    public function importExcel(Request $request){
+        $file = $request->file('file');
+        $nama_file = rand().$file->getClientOriginalName();
+        $file->move('file_excel', $nama_file);
+        Excel::import(new ProductImport, public_path('/file_excel/'.$nama_file));
+        return redirect('admin/product');
     }
 }

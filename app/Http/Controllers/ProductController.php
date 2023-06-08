@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
+use PDF;
 
 class ProductController extends Controller
 {
@@ -171,5 +172,12 @@ class ProductController extends Controller
         }
         $data->delete();
         return redirect()->route('produk-edit', $id[1]);
+    }
+    public function productPDF(){
+        $product = Product::all();
+        
+        $pdf = PDF::loadView('pages-penjual.produk.productPDF', ['product' => $product])->setPaper('a4', 'landscape');
+        // return $pdf->download('data_pegawai.pdf');
+        return $pdf->stream();
     }
 }

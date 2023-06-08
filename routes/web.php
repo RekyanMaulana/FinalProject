@@ -72,6 +72,7 @@ Route::group(['middleware' => ['auth', 'role:Penjual']], function () {
         Route::put('/{id}/update', [ProductController::class, 'update'])->name('produk-update');
         Route::delete('/{id}/destroy', [ProductController::class, 'destroy'])->name('produk-hapus');
         Route::get('/hapus_gallery/{id}', [ProductController::class, 'hapus_gallery'])->name('hapus_gallery');
+        Route::get('/productPDF', [ProductController::class, 'productPDF']);
     });
 
 

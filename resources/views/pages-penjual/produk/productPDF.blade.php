@@ -13,25 +13,24 @@
     <thead>
         <tr>
             <th>No</th>
-            <th>Nama</th>
-            <th>Jenis</th>
-            <th>Price</th>
+            <th>Nama Produk</th>
+            <th>Jenis Produk</th>
+            <th>Harga/pcs</th>
             <th>Stok</th>
-            <th>Deskripsi Barang</th>
-            <th>Penjual</th>
+            <th>Deskripsi Produk</th>
         </tr>
     </thead>
     <tbody>
-        @php $no = 1; @endphp
-        @foreach($product as $prod)
+        @php $i = 1 @endphp
+        @foreach($data as $data)
         <tr>
-            <td>{{$no}}</td>
-            <td>{{$prod->nama}}</td>
-            <td>{{$prod->jenis}}</td>
-            <td>{{$prod->price}}</td>
-            <td>{{$prod->stok}}</td>
-            <td>{{$prod->deskripsi_barang}}</td>
-            <td>{{$prod->penjual->nama_toko}}</td>
+            <td>{{$i++}}</td>
+            <td>{{$data->nama}}</td>
+            <td>{{$data->jenis}}</td>
+            <td>Rp. {{number_format($data->price, 0, ",", ".")}}</td>
+            <td>{{$data->stok}}</td>
+            <td>{{$data->deskripsi_barang}}</td>
+            
         </tr>
         @endforeach
     </tbody>

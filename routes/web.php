@@ -62,7 +62,8 @@ Route::group(['middleware' => ['auth', 'role:Admin']], function () {
 // menu yang dapat di akses hanya user dengan role penjual
 Route::group(['middleware' => ['auth', 'role:Penjual']], function () {
     Route::get('/home_penjual', [HomePenjualController::class, 'index'])->name('home_penjual');
-
+    Route::get('/productPDF', [ProductController::class, 'productPDF'])->name('produk-PDF');
+    Route::get('/product_export', [ProductController::class, 'exportExcel'])->name('produk-export');
     Route::prefix('produk')->group(function () {
         Route::get('/', [ProductController::class, 'index'])->name('produk');
         Route::get('/create', [ProductController::class, 'create'])->name('produk-create');
@@ -72,7 +73,9 @@ Route::group(['middleware' => ['auth', 'role:Penjual']], function () {
         Route::put('/{id}/update', [ProductController::class, 'update'])->name('produk-update');
         Route::delete('/{id}/destroy', [ProductController::class, 'destroy'])->name('produk-hapus');
         Route::get('/hapus_gallery/{id}', [ProductController::class, 'hapus_gallery'])->name('hapus_gallery');
-        Route::get('/productPDF', [ProductController::class, 'productPDF']);
+        
+        // Route::get('/productPDF', function(){return "Apa aja";})->name('produk-PDF');
+        // Route::get('/coba', function(){return "Apa aja";})->name('coba');
     });
 
 

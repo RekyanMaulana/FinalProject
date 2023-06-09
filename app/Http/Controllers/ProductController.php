@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use PDF;
+use App\Exports\ProductExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ProductController extends Controller
 {
@@ -174,10 +176,13 @@ class ProductController extends Controller
         return redirect()->route('produk-edit', $id[1]);
     }
     public function productPDF(){
-        $product = Product::all();
-        
-        $pdf = PDF::loadView('pages-penjual.produk.productPDF', ['product' => $product])->setPaper('a4', 'landscape');
-        // return $pdf->download('data_pegawai.pdf');
+        $data = Product::where('penjual_id', Auth::user()->penjual->id)->orderBy('created_at', 'desc')->get();
+
+        $pdf = PDF::loadView('pages-penjual.produk.productPDF', compact('data'))->setPaper('a4', 'landscape');
         return $pdf->stream();
+    }
+    public function exportExcel() 
+    {
+        return Excel::download(new ProductExport, 'product.xlsx');
     }
 }

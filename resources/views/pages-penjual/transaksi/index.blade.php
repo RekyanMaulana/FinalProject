@@ -59,7 +59,7 @@
                         @php $x=1 @endphp
                         @foreach($dikirim as $dikirim) <tr>
                             <td>{{$x++}}</td>
-                            <td>{{$diproses->nama}}</td>
+                            <td>{{$dikirim->nama}}</td>
                             <td>{{$dikirim->tanggal}}</td>
                             @if($dikirim->status_pembayaran != 'Lunas')
                             <td><span class="badge badge-danger">Belum Dibayar</span></td>
@@ -96,7 +96,7 @@
                         @php $x=1 @endphp
                         @foreach($diterima as $data) <tr>
                             <td>{{$x++}}</td>
-                            <td>{{$diproses->nama}}</td>
+                            <td>{{$data->nama}}</td>
                             <td>{{$data->tanggal}}</td>
                             @if($data->status_pembayaran != 'Lunas')
                             <td><span class="badge badge-danger">Belum Dibayar</span></td>

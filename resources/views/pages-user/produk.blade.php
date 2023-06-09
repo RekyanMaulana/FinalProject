@@ -32,12 +32,12 @@
                     <div class="flex items-center">
                         <input type="checkbox" name="cat-1" id="cat-1" class="text-primary focus:ring-0 rounded-sm cursor-pointer">
                         <label for="cat-1" class="text-gray-600 ml-3 cusror-pointer">Makanan</label>
-                        <div class="ml-auto text-gray-600 text-sm">(15)</div>
+                        <div class="ml-auto text-gray-600 text-sm">({{$total_makanan}})</div>
                     </div>
                     <div class="flex items-center">
                         <input type="checkbox" name="cat-2" id="cat-2" class="text-primary focus:ring-0 rounded-sm cursor-pointer">
                         <label for="cat-2" class="text-gray-600 ml-3 cusror-pointer">Minuman</label>
-                        <div class="ml-auto text-gray-600 text-sm">(9)</div>
+                        <div class="ml-auto text-gray-600 text-sm">({{$total_minuman}})</div>
                     </div>
                 </div>
             </div>
@@ -45,16 +45,13 @@
             <div class="pt-4">
                 <h3 class="text-xl text-gray-800 mb-3 uppercase font-medium">Penjual</h3>
                 <div class="space-y-2">
+                    @foreach($penjual as $data)
                     <div class="flex items-center">
                         <input type="checkbox" name="brand-1" id="brand-1" class="text-primary focus:ring-0 rounded-sm cursor-pointer">
-                        <label for="brand-1" class="text-gray-600 ml-3 cusror-pointer">Pak Radit</label>
-                        <div class="ml-auto text-gray-600 text-sm">(15)</div>
+                        <label for="brand-1" class="text-gray-600 ml-3 cusror-pointer">{{$data->nama_toko}}</label>
+                        <div class="ml-auto text-gray-600 text-sm">({{$data->product_count}})</div>
                     </div>
-                    <div class="flex items-center">
-                        <input type="checkbox" name="brand-2" id="brand-2" class="text-primary focus:ring-0 rounded-sm cursor-pointer">
-                        <label for="brand-2" class="text-gray-600 ml-3 cusror-pointer">Pak Rangga</label>
-                        <div class="ml-auto text-gray-600 text-sm">(9)</div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
 
@@ -81,12 +78,12 @@
                     <div class="flex items-center">
                         <input type="checkbox" name="cat-1" id="cat-1" class="text-primary focus:ring-0 rounded-sm cursor-pointer">
                         <label for="cat-1" class="text-gray-600 ml-3 cusror-pointer">Makanan</label>
-                        <div class="ml-auto text-gray-600 text-sm">(15)</div>
+                        <div class="ml-auto text-gray-600 text-sm">({{$total_makanan}})</div>
                     </div>
                     <div class="flex items-center">
                         <input type="checkbox" name="cat-2" id="cat-2" class="text-primary focus:ring-0 rounded-sm cursor-pointer">
                         <label for="cat-2" class="text-gray-600 ml-3 cusror-pointer">Minuman</label>
-                        <div class="ml-auto text-gray-600 text-sm">(9)</div>
+                        <div class="ml-auto text-gray-600 text-sm">({{$total_minuman}})</div>
                     </div>
                 </div>
             </div>
@@ -94,16 +91,14 @@
             <div class="pt-4">
                 <h3 class="text-xl text-gray-800 mb-3 uppercase font-medium">Penjual</h3>
                 <div class="space-y-2">
+
+                    @foreach($penjual as $data)
                     <div class="flex items-center">
                         <input type="checkbox" name="brand-1" id="brand-1" class="text-primary focus:ring-0 rounded-sm cursor-pointer">
-                        <label for="brand-1" class="text-gray-600 ml-3 cusror-pointer">Pak Radit</label>
-                        <div class="ml-auto text-gray-600 text-sm">(15)</div>
+                        <label for="brand-1" class="text-gray-600 ml-3 cusror-pointer">{{$data->nama_toko}}</label>
+                        <div class="ml-auto text-gray-600 text-sm">({{$data->product_count}})</div>
                     </div>
-                    <div class="flex items-center">
-                        <input type="checkbox" name="brand-2" id="brand-2" class="text-primary focus:ring-0 rounded-sm cursor-pointer">
-                        <label for="brand-2" class="text-gray-600 ml-3 cusror-pointer">Pak Rangga</label>
-                        <div class="ml-auto text-gray-600 text-sm">(9)</div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
 
@@ -129,237 +124,45 @@
                     </button>
                 </div>
             </div>
-            <select name="sort" id="sort" class="w-44 text-sm text-gray-600 py-3 px-4 border-gray-300 shadow-sm rounded focus:ring-primary focus:border-primary">
-                <option value="">Default sorting</option>
-                <option value="price-low-to-high">Price low to high</option>
-                <option value="price-high-to-low">Price high to low</option>
-                <option value="latest">Latest product</option>
-            </select>
         </div>
 
         <div class="grid md:grid-cols-3 grid-cols-2 gap-6">
+            @foreach($produk as $data)
+            @php $image = $data->product_galleries[0]['foto']; $rating = ($data->nilai != null ) ? round($data->nilai, 2) : 0; @endphp
             <div class="bg-white shadow rounded overflow-hidden group">
                 <div class="relative">
-                    <img src="{{url('assets/user/images/products/makanan1.jpeg')}}" alt="product 1" style="height: 170px; width: 100%;">
+                    <img src="{{ url('assets/produk',$image)}}" alt="product 1" style="height: 170px; width: 100%;">
                     <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center 
-                        justify-center gap-2 opacity-0 group-hover:opacity-100 transition">
-
-                        <a href="#" class="text-white text-lg w-9 h-8 rounded-full bg-red-600 flex items-center justify-center hover:bg-gray-800 transition" title="view product"><i class="fas fa-eye"></i>
+                    justify-center gap-2 opacity-0 group-hover:opacity-100 transition">
+                        <a href="{{route('detail_produk',$data->id)}}" class="text-white text-lg w-9 h-8 rounded-full bg-red-600 flex items-center justify-center hover:bg-gray-800 transition" title="view product"><i class="fas fa-eye"></i>
                         </a>
-                        <a href="#" class="text-white text-lg w-9 h-8 rounded-full bg-red-600 flex items-center justify-center hover:bg-gray-800 transition" title="add to wishlist">
+                        <a href="{{route('favorit-create',$data->id)}}" class="text-white text-lg w-9 h-8 rounded-full bg-red-600 flex items-center justify-center hover:bg-gray-800 transition" title="add to wishlist">
                             <i class="fas fa-heart"></i>
                         </a>
                     </div>
                 </div>
                 <div class="pt-4 pb-3 px-4">
-                    <a href="#">
-                        <h4 class="uppercase font-medium text-xl mb-2 text-gray-800 hover:text-primary transition">
-                            Guyer
-                            Chair</h4>
+                    <a href="{{route('detail_produk',$data->id)}}">
+                        <h4 class="uppercase font-medium text-xl mb-2 text-gray-800 hover:text-primary transition">{{$data->nama}}</h4>
                     </a>
                     <div class="flex items-baseline mb-1 space-x-2">
-                        <p class="text-xl text-primary font-semibold">Rp. 15.000</p>
+                        <p class="text-xl text-primary font-semibold">Rp. {{number_format($data->price, 0, ",", ".")}}</p>
                     </div>
-                    <div class="flex items-center">
+                    <div class="flex items-center"><i class=""></i>
                         <div class="flex gap-1 text-sm text-yellow-400">
-                            <span><i class="fas fa-star"></i></span>
-                            <span><i class="fas fa-star"></i></span>
-                            <span><i class="fas fa-star"></i></span>
-                            <span><i class="fas fa-star"></i></span>
-                            <span><i class="far fa-star"></i></span>
+                            <span><i class="{{($rating <= 0) ? 'far fa-star' : (($rating > 0 && $rating < 1 ) ? 'fas fa-star-half-alt' : 'fas fa-star')}}"></i></span>
+                            <span><i class="{{($rating <= 1) ? 'far fa-star' : (($rating > 1 && $rating < 2 ) ? 'fas fa-star-half-alt' : 'fas fa-star')}}"></i></span>
+                            <span><i class="{{($rating <= 2) ? 'far fa-star' : (($rating > 2 && $rating < 3 ) ? 'fas fa-star-half-alt' : 'fas fa-star')}}"></i></span>
+                            <span><i class="{{($rating <= 3) ? 'far fa-star' : (($rating > 3 && $rating < 4 ) ? 'fas fa-star-half-alt' : 'fas fa-star')}}"></i></span>
+                            <span><i class="{{($rating <= 4) ? 'far fa-star' : (($rating > 4 && $rating < 5 ) ? 'fas fa-star-half-alt' : 'fas fa-star')}}"></i></span>
                         </div>
-                        <div class="text-xs text-gray-500 ml-3">(150)</div>
+                        <div class="text-xs text-gray-500 ml-3">({{$rating}})</div>
                     </div>
                 </div>
-                <a href="#" class="block w-full py-1 text-center text-white bg-red-600 border border-primary rounded-b hover:bg-transparent hover:text-primary transition">Tambah
-                    ke keranjang</a>
+                <a href="{{route('pesanan-create',$data->id)}}" class="block w-full py-1 text-center text-white bg-red-600 border border-primary rounded-b hover:bg-transparent hover:text-primary transition">Tambah
+                    ke Pesanan</a>
             </div>
-
-            <div class="bg-white shadow rounded overflow-hidden group">
-                <div class="relative">
-                    <img src="{{url('assets/user/images/products/makanan2.jpeg')}}" alt="product 1" style="height: 170px; width: 100%;">
-                    <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center 
-                        justify-center gap-2 opacity-0 group-hover:opacity-100 transition">
-                        <a href="#" class="text-white text-lg w-9 h-8 rounded-full bg-red-600 flex items-center justify-center hover:bg-gray-800 transition" title="view product"><i class="fas fa-eye"></i>
-                        </a>
-                        <a href="#" class="text-white text-lg w-9 h-8 rounded-full bg-red-600 flex items-center justify-center hover:bg-gray-800 transition" title="add to wishlist">
-                            <i class="fas fa-heart"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="pt-4 pb-3 px-4">
-                    <a href="#">
-                        <h4 class="uppercase font-medium text-xl mb-2 text-gray-800 hover:text-primary transition">
-                            Guyer
-                            Chair</h4>
-                    </a>
-                    <div class="flex items-baseline mb-1 space-x-2">
-                        <p class="text-xl text-primary font-semibold">Rp. 15.000</p>
-                    </div>
-                    <div class="flex items-center">
-
-                        <div class="flex gap-1 text-sm text-yellow-400">
-
-                            <span><i class="fas fa-star"></i></span>
-                            <span><i class="fas fa-star"></i></span>
-                            <span><i class="fas fa-star"></i></span>
-                            <span><i class="fas fa-star"></i></span>
-                            <span><i class="far fa-star"></i></span>
-                        </div>
-                        <div class="text-xs text-gray-500 ml-3">(150)</div>
-                    </div>
-                </div>
-                <a href="#" class="block w-full py-1 text-center text-white bg-red-600 border border-primary rounded-b hover:bg-transparent hover:text-primary transition">Tambah
-                    ke keranjang</a>
-            </div>
-
-            <div class="bg-white shadow rounded overflow-hidden group">
-                <div class="relative">
-                    <img src="{{url('assets/user/images/products/makanan3.jpeg')}}" alt="product 1" style="height: 170px; width: 100%;">
-                    <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center 
-                        justify-center gap-2 opacity-0 group-hover:opacity-100 transition">
-                        <a href="#" class="text-white text-lg w-9 h-8 rounded-full bg-red-600 flex items-center justify-center hover:bg-gray-800 transition" title="view product"><i class="fas fa-eye"></i>
-                        </a>
-                        <a href="#" class="text-white text-lg w-9 h-8 rounded-full bg-red-600 flex items-center justify-center hover:bg-gray-800 transition" title="add to wishlist">
-                            <i class="fas fa-heart"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="pt-4 pb-3 px-4">
-                    <a href="#">
-                        <h4 class="uppercase font-medium text-xl mb-2 text-gray-800 hover:text-primary transition">
-                            Guyer
-                            Chair</h4>
-                    </a>
-                    <div class="flex items-baseline mb-1 space-x-2">
-                        <p class="text-xl text-primary font-semibold">Rp. 15.000</p>
-                    </div>
-                    <div class="flex items-center">
-                        <div class="flex gap-1 text-sm text-yellow-400">
-
-                            <span><i class="fas fa-star"></i></span>
-                            <span><i class="fas fa-star"></i></span>
-                            <span><i class="fas fa-star"></i></span>
-                            <span><i class="fas fa-star"></i></span>
-                            <span><i class="far fa-star"></i></span>
-                        </div>
-                        <div class="text-xs text-gray-500 ml-3">(150)</div>
-                    </div>
-                </div>
-                <a href="#" class="block w-full py-1 text-center text-white bg-red-600 border border-primary rounded-b hover:bg-transparent hover:text-primary transition">Tambah
-                    ke keranjang</a>
-            </div>
-
-            <div class="bg-white shadow rounded overflow-hidden group">
-                <div class="relative">
-                    <img src="{{url('assets/user/images/products/makanan4.jpeg')}}" alt="product 1" style="height: 170px; width: 100%;">
-                    <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center 
-                        justify-center gap-2 opacity-0 group-hover:opacity-100 transition">
-                        <a href="#" class="text-white text-lg w-9 h-8 rounded-full bg-red-600 flex items-center justify-center hover:bg-gray-800 transition" title="view product"><i class="fas fa-eye"></i>
-                        </a>
-                        <a href="#" class="text-white text-lg w-9 h-8 rounded-full bg-red-600 flex items-center justify-center hover:bg-gray-800 transition" title="add to wishlist">
-                            <i class="fas fa-heart"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="pt-4 pb-3 px-4">
-                    <a href="#">
-                        <h4 class="uppercase font-medium text-xl mb-2 text-gray-800 hover:text-primary transition">
-                            Guyer
-                            Chair</h4>
-                    </a>
-                    <div class="flex items-baseline mb-1 space-x-2">
-                        <p class="text-xl text-primary font-semibold">Rp. 15.000</p>
-                    </div>
-                    <div class="flex items-center">
-                        <div class="flex gap-1 text-sm text-yellow-400">
-
-                            <span><i class="fas fa-star"></i></span>
-                            <span><i class="fas fa-star"></i></span>
-                            <span><i class="fas fa-star"></i></span>
-                            <span><i class="fas fa-star"></i></span>
-                            <span><i class="far fa-star"></i></span>
-                        </div>
-                        <div class="text-xs text-gray-500 ml-3">(150)</div>
-                    </div>
-                </div>
-                <a href="#" class="block w-full py-1 text-center text-white bg-red-600 border border-primary rounded-b hover:bg-transparent hover:text-primary transition">Tambah
-                    ke keranjang</a>
-            </div>
-
-            <div class="bg-white shadow rounded overflow-hidden group">
-                <div class="relative">
-                    <img src="{{url('assets/user/images/products/makanan5.jpeg')}}" alt="product 1" style="height: 170px; width: 100%;">
-                    <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center 
-                        justify-center gap-2 opacity-0 group-hover:opacity-100 transition">
-                        <a href="#" class="text-white text-lg w-9 h-8 rounded-full bg-red-600 flex items-center justify-center hover:bg-gray-800 transition" title="view product"><i class="fas fa-eye"></i>
-                        </a>
-                        <a href="#" class="text-white text-lg w-9 h-8 rounded-full bg-red-600 flex items-center justify-center hover:bg-gray-800 transition" title="add to wishlist">
-                            <i class="fas fa-heart"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="pt-4 pb-3 px-4">
-                    <a href="#">
-                        <h4 class="uppercase font-medium text-xl mb-2 text-gray-800 hover:text-primary transition">
-                            Guyer
-                            Chair</h4>
-                    </a>
-                    <div class="flex items-baseline mb-1 space-x-2">
-                        <p class="text-xl text-primary font-semibold">Rp. 15.000</p>
-                    </div>
-                    <div class="flex items-center">
-                        <div class="flex gap-1 text-sm text-yellow-400">
-
-                            <span><i class="fas fa-star"></i></span>
-                            <span><i class="fas fa-star"></i></span>
-                            <span><i class="fas fa-star"></i></span>
-                            <span><i class="fas fa-star"></i></span>
-                            <span><i class="far fa-star"></i></span>
-                        </div>
-                        <div class="text-xs text-gray-500 ml-3">(150)</div>
-                    </div>
-                </div>
-                <a href="#" class="block w-full py-1 text-center text-white bg-red-600 border border-primary rounded-b hover:bg-transparent hover:text-primary transition">Tambah
-                    ke keranjang</a>
-            </div>
-
-            <div class="bg-white shadow rounded overflow-hidden group">
-                <div class="relative">
-                    <img src="{{url('assets/user/images/products/makanan6.jpeg')}}" alt="product 1" style="height: 170px; width: 100%;">
-                    <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center 
-                        justify-center gap-2 opacity-0 group-hover:opacity-100 transition">
-                        <a href="#" class="text-white text-lg w-9 h-8 rounded-full bg-red-600 flex items-center justify-center hover:bg-gray-800 transition" title="view product"><i class="fas fa-eye"></i>
-                        </a>
-                        <a href="#" class="text-white text-lg w-9 h-8 rounded-full bg-red-600 flex items-center justify-center hover:bg-gray-800 transition" title="add to wishlist">
-                            <i class="fas fa-heart"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="pt-4 pb-3 px-4">
-                    <a href="#">
-                        <h4 class="uppercase font-medium text-xl mb-2 text-gray-800 hover:text-primary transition">
-                            Guyer
-                            Chair</h4>
-                    </a>
-                    <div class="flex items-baseline mb-1 space-x-2">
-                        <p class="text-xl text-primary font-semibold">Rp. 15.000</p>
-                    </div>
-                    <div class="flex items-center">
-                        <div class="flex gap-1 text-sm text-yellow-400">
-
-                            <span><i class="fas fa-star"></i></span>
-                            <span><i class="fas fa-star"></i></span>
-                            <span><i class="fas fa-star"></i></span>
-                            <span><i class="fas fa-star"></i></span>
-                            <span><i class="far fa-star"></i></span>
-                        </div>
-                        <div class="text-xs text-gray-500 ml-3">(150)</div>
-                    </div>
-                </div>
-                <a href="#" class="block w-full py-1 text-center text-white bg-red-600 border border-primary rounded-b hover:bg-transparent hover:text-primary transition">Tambah
-                    ke keranjang</a>
-            </div>
+            @endforeach
         </div>
     </div>
 

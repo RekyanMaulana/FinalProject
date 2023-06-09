@@ -47,7 +47,11 @@
     <div class="container flex">
         <div class="flex items-center justify-between flex-grow md:pl-12 py-5">
             <div class="flex items-center space-x-6 capitalize">
+                @if(Auth::user())
                 <a href="{{route('home')}}" class="text-gray-200 hover:text-white transition">Home</a>
+                @else
+                <a href="{{route('halaman_awal')}}" class="text-gray-200 hover:text-white transition">Home</a>
+                @endif
                 <a href="{{route('katalog_produk')}}" class="text-gray-200 hover:text-white transition">Katalog Produk</a>
                 <a href="{{route('about_us')}}" class="text-gray-200 hover:text-white transition">About us</a>
                 <a href="{{route('contact_us')}}" class="text-gray-200 hover:text-white transition">Contact us</a>

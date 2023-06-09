@@ -37,11 +37,11 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleInputStok">Tambah Stok</label>
-                        <input type="number" class="form-control" id="exampleInputStok" name="tambah_stok" required placeholder="Input Stok Baru" value="0">
+                        <input type="number" class="form-control" id="exampleInputStok" name="tambah_stok" placeholder="Input Stok Baru" value="0">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputStok">Kurangi Stok</label>
-                        <input type="number" class="form-control" id="exampleInputStok" name="kurang_stok" required placeholder="Input Stok Baru" value="0">
+                        <input type="number" class="form-control" id="exampleInputStok" name="kurang_stok" placeholder="Input Stok Baru" value="0">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputHarga">Harga/Pcs</label>
@@ -61,7 +61,7 @@
                         <label for="exampleInputFile">Input Gambar</label>
                         <div class="input-group">
                             <div class="custom-file">
-                                <input type="file" class="form-control" required multiple name="foto[]" id="exampleInputFile">
+                                <input type="file" class="form-control" multiple name="foto[]" id="exampleInputFile">
                             </div>
                         </div>
                     </div>

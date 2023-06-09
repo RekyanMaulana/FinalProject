@@ -18,6 +18,12 @@ class Product extends Model
         return $this->hasMany(Product_Galleries::class);
     }
 
+    public function detail_transaksi()
+    {
+        return $this->hasMany(DetailTransaksi::class);
+    }
+
+
     public function penjual()
     {
         return $this->belongsTo(Penjual::class);

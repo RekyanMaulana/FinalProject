@@ -24,10 +24,8 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', function () {
-    $title = "Dashboard";
-    return view('pages-user.dashboard', compact('title'));
-});
+
+Route::get('/', [ProductController::class, 'halaman_awal'])->name('halaman_awal');
 
 Route::get('/katalog_produk', [KatalogProdukController::class, 'index'])->name('katalog_produk');
 Route::get('/detail_produk/{id}', [KatalogProdukController::class, 'show'])->name('detail_produk');

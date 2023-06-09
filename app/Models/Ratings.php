@@ -11,7 +11,7 @@ class Ratings extends Model
     protected $table = 'rating';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'rating','review','detail_transaksi_id'
+        'rating', 'review', 'detail_transaksi_id'
     ];
 
     public function detail_transaksi()

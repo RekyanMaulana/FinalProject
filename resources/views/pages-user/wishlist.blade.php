@@ -84,56 +84,36 @@
 
     <!-- wishlist -->
     <div class="col-span-9 space-y-4">
+        @foreach($favorit as $data)
         <div class="flex items-center justify-between border gap-6 p-4 border-gray-200 rounded">
             <div class="w-28">
-                <img src="{{url('assets/user/images/products/makanan1.jpeg')}}" alt="product 6" style="height: 80px;" class="w-full">
+                <img src="{{ url('assets/produk',$data->product->product_galleries[0]->foto)}}" alt=" product 6" style="height: 80px;" class="w-full">
             </div>
             <div class="w-1/3">
-                <h2 class="text-gray-800 text-xl font-medium uppercase">Italian L shape</h2>
-                <p class="text-gray-500 text-sm">Availability: <span class="text-green-600">In Stock</span></p>
+                <h2 class="text-gray-800 text-xl font-medium uppercase">{{$data->product->nama}}</h2>
+                <p class="text-gray-500 text-sm">Availability:
+                    @if($data->product->stok != 0)
+                    <span class="text-green-600">Tersedia</span>
+                    @else
+                    <span class="text-red-600">Tidak Tersedia</span>
+                    @endif
+                </p>
             </div>
-            <div class="text-primary text-lg font-semibold">Rp. 15.000</div>
-            <a href="#" class="px-6 py-2 text-center text-sm text-white bg-red-600 border border-primary rounded hover:bg-transparent hover:text-primary transition uppercase font-roboto font-medium">add
+            <div class="text-primary text-lg font-semibold">Rp. {{number_format($data->product->price, 0, ",", ".")}}</div>
+
+            @if($data->product->stok != 0)
+            <a href="{{route('pesanan-create',$data->id)}}" class="px-6 py-2 text-center text-sm text-white bg-red-600 border border-primary rounded hover:bg-transparent hover:text-primary transition uppercase font-roboto font-medium">add
                 to cart</a>
+            @else
+            <button disabled class="px-6 py-2 text-center text-sm text-white bg-red-300 border border-red-300 rounded">add
+                to cart</button>
+            @endif
 
-            <div class="text-gray-600 cursor-pointer hover:text-primary">
+            <a href="{{route('favorit-hapus',$data->id)}}" onclick="notificationforDelete(event, this)" class="text-gray-600 cursor-pointer hover:text-primary">
                 <i class="fas fa-trash-alt"></i>
-            </div>
+            </a>
         </div>
-
-        <div class="flex items-center justify-between border gap-6 p-4 border-gray-200 rounded">
-            <div class="w-28">
-                <img src="{{url('assets/user/images/products/makanan2.jpeg')}}" alt="product 6" style="height: 80px;" class="w-full">
-            </div>
-            <div class="w-1/3">
-                <h2 class="text-gray-800 text-xl font-medium uppercase">Dining Table</h2>
-                <p class="text-gray-500 text-sm">Availability: <span class="text-green-600">In Stock</span></p>
-            </div>
-            <div class="text-primary text-lg font-semibold">Rp. 15.000</div>
-            <a href="#" class="px-6 py-2 text-center text-sm text-white bg-red-600 border border-primary rounded hover:bg-transparent hover:text-primary transition uppercase font-roboto font-medium">add
-                to cart</a>
-
-            <div class="text-gray-600 cursor-pointer hover:text-primary">
-                <i class="fas fa-trash-alt"></i>
-            </div>
-        </div>
-
-        <div class="flex items-center justify-between border gap-6 p-4 border-gray-200 rounded">
-            <div class="w-28">
-                <img src="{{url('assets/user/images/products/makanan3.jpeg')}}" alt="product 6" style="height: 80px;" class="w-full">
-            </div>
-            <div class="w-1/3">
-                <h2 class="text-gray-800 text-xl font-medium uppercase">Sofa</h2>
-                <p class="text-gray-500 text-sm">Availability: <span class="text-red-600">Out of Stock</span></p>
-            </div>
-            <div class="text-primary text-lg font-semibold">Rp. 15.000</div>
-            <a href="#" class="cursor-not-allowed px-6 py-2 text-center texred-600 text-white bg-red-400 border border-red-400 rounded transition uppercase font-roboto font-medium">add
-                to cart</a>
-
-            <div class="text-gray-600 cursor-pointer hover:text-primary">
-                <i class="fas fa-trash-alt"></i>
-            </div>
-        </div>
+        @endforeach
     </div>
     <!-- ./wishlist -->
 

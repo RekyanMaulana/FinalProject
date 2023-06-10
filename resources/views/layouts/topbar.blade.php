@@ -8,13 +8,14 @@
             <img src="{{url('assets/user/images/logo.png')}}" alt="Logo" class="w-32">
         </a>
 
-        <div class="w-full max-w-xl relative flex">
+        <form action="{{route('search_produk')}}" method="post" class="w-full max-w-xl relative flex">
+            @csrf
             <span class="absolute left-4 top-3 text-lg text-gray-400">
                 <i class="fa-solid fa-magnifying-glass"></i>
             </span>
             <input type="text" name="search" id="search" class="w-full border border-red-400 border-r-0 pl-12 py-3 pr-3 rounded-l-md hidden md:flex focus:outline-none" placeholder="search">
-            <button class="bg-red-600 border border-primary text-white px-8 rounded-r-md hover:bg-transparent hover:text-primary transition md:flex hidden" style="padding-top:2%;">Search</button>
-        </div>
+            <button type="submit" class="bg-red-600 border border-primary text-white px-8 rounded-r-md hover:bg-transparent hover:text-primary transition md:flex hidden" style="padding-top:2%;">Search</button>
+        </form>
 
         <div class="flex items-center space-x-4">
             @if(Auth::user())

@@ -23,7 +23,6 @@ class Product extends Model
         return $this->hasMany(DetailTransaksi::class);
     }
 
-
     public function penjual()
     {
         return $this->belongsTo(Penjual::class);

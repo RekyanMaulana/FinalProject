@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ $title }}</title>
 
     <link rel="shortcut icon" href="{{url('assets/user/images/url-icon.png')}}" type="image/x-icon">
@@ -100,6 +101,31 @@
     </div>
     <!-- ./copyright -->
 
+    <form action="" id="delete-form" method="POST">
+        @method('delete')
+        @csrf
+    </form>
+
+    <script>
+        function notificationforDelete(event, el) {
+            event.preventDefault();
+            swal.fire({
+                title: "Apakah Anda Yakin Menghapus Data Ini?",
+                icon: "warning",
+                closeOnClickOutside: false,
+                showCancelButton: true,
+                confirmButtonText: 'Iya',
+                confirmButtonColor: '#6777ef',
+                cancelButtonText: 'Batal',
+                cancelButtonColor: '#d33',
+            }).then((result) => {
+                if (result.value) {
+                    $("#delete-form").attr('action', $(el).attr('href'));
+                    $("#delete-form").submit();
+                }
+            });
+        }
+    </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
     <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>

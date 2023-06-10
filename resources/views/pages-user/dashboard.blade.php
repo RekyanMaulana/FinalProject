@@ -63,8 +63,14 @@
                     <div class="text-xs text-gray-500 ml-3">{{$p->detail_transaksi_count}}X Dibeli</div>
                 </div>
             </div>
+
+            @if($p->stok != 0)
             <a href="{{route('pesanan-create',$p->id)}}" class="block w-full py-1 text-center text-white bg-red-600 border border-primary rounded-b hover:bg-transparent hover:text-primary transition">Tambah
                 ke Pesanan</a>
+            @else
+            <button disabled class="block w-full py-1 text-center text-white bg-red-300 border border-red-300 rounded-b">Tambah
+                ke Pesanan</button>
+            @endif
         </div>
         @endforeach
     </div>
@@ -115,8 +121,14 @@
                     <div class="text-xs text-gray-500 ml-3">({{$rating}})</div>
                 </div>
             </div>
+
+            @if($data->stok != 0)
             <a href="{{route('pesanan-create',$data->id)}}" class="block w-full py-1 text-center text-white bg-red-600 border border-primary rounded-b hover:bg-transparent hover:text-primary transition">Tambah
                 ke Pesanan</a>
+            @else
+            <button disabled class="block w-full py-1 text-center text-white bg-red-300 border border-red-300 rounded-b">Tambah
+                ke Pesanan</button>
+            @endif
         </div>
         @endforeach
     </div>

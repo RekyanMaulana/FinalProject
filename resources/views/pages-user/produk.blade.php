@@ -25,94 +25,97 @@
             <span class="sr-only">Close menu</span>
         </button>
         <div class="divide-y divide-gray-200 space-y-5">
+            <form action="{{route('filter_produk')}}" method="post">
 
-            <div>
-                <h3 class="text-xl text-gray-800 mb-3 uppercase font-medium">Kategori</h3>
-                <div class="space-y-2">
-                    <div class="flex items-center">
-                        <input type="checkbox" name="cat-1" id="cat-1" class="text-primary focus:ring-0 rounded-sm cursor-pointer">
-                        <label for="cat-1" class="text-gray-600 ml-3 cusror-pointer">Makanan</label>
-                        <div class="ml-auto text-gray-600 text-sm">({{$total_makanan}})</div>
-                    </div>
-                    <div class="flex items-center">
-                        <input type="checkbox" name="cat-2" id="cat-2" class="text-primary focus:ring-0 rounded-sm cursor-pointer">
-                        <label for="cat-2" class="text-gray-600 ml-3 cusror-pointer">Minuman</label>
-                        <div class="ml-auto text-gray-600 text-sm">({{$total_minuman}})</div>
+                <div>
+                    <h3 class="text-xl text-gray-800 mb-3 uppercase font-medium">Kategori</h3>
+                    <div class="space-y-2">
+                        <div class="flex items-center">
+                            <input type="checkbox" name="jenis[]" id="cat-1" value="Makanan" class="text-primary focus:ring-0 rounded-sm cursor-pointer">
+                            <label for="cat-1" class="text-gray-600 ml-3 cusror-pointer">Makanan</label>
+                            <div class="ml-auto text-gray-600 text-sm">({{$total_makanan}})</div>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="checkbox" name="jenis[]" id="cat-2" value="Minuman" class="text-primary focus:ring-0 rounded-sm cursor-pointer">
+                            <label for="cat-2" class="text-gray-600 ml-3 cusror-pointer">Minuman</label>
+                            <div class="ml-auto text-gray-600 text-sm">({{$total_minuman}})</div>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="pt-4">
-                <h3 class="text-xl text-gray-800 mb-3 uppercase font-medium">Penjual</h3>
-                <div class="space-y-2">
-                    @foreach($penjual as $data)
-                    <div class="flex items-center">
-                        <input type="checkbox" name="brand-1" id="brand-1" class="text-primary focus:ring-0 rounded-sm cursor-pointer">
-                        <label for="brand-1" class="text-gray-600 ml-3 cusror-pointer">{{$data->nama_toko}}</label>
-                        <div class="ml-auto text-gray-600 text-sm">({{$data->product_count}})</div>
+                <div class="pt-4">
+                    <h3 class="text-xl text-gray-800 mb-3 uppercase font-medium">Penjual</h3>
+                    <div class="space-y-2">
+                        @foreach($penjual as $data)
+                        <div class="flex items-center">
+                            <input type="checkbox" name="nama_penjual[]" value="{{$data->id}}" id="brand-1" class="text-primary focus:ring-0 rounded-sm cursor-pointer">
+                            <label for="brand-1" class="text-gray-600 ml-3 cusror-pointer">{{$data->nama_toko}}</label>
+                            <div class="ml-auto text-gray-600 text-sm">({{$data->product_count}})</div>
+                        </div>
+                        @endforeach
                     </div>
-                    @endforeach
                 </div>
-            </div>
 
-            <div class="pt-4">
-                <h3 class="text-xl text-gray-800 mb-3 uppercase font-medium">Price</h3>
-                <div class="mt-4 flex items-center">
-                    <input type="text" name="min" id="min" class="w-full border-gray-300 focus:border-primary rounded focus:ring-0 px-3 py-1 text-gray-600 shadow-sm" placeholder="min">
-                    <span class="mx-3 text-gray-500">-</span>
-                    <input type="text" name="max" id="max" class="w-full border-gray-300 focus:border-primary rounded focus:ring-0 px-3 py-1 text-gray-600 shadow-sm" placeholder="max">
+                <div class="pt-4">
+                    <h3 class="text-xl text-gray-800 mb-3 uppercase font-medium">Price</h3>
+                    <div class="mt-4 flex items-center">
+                        <input type="number" name="harga_min" id="min" class="w-full border-gray-300 focus:border-primary rounded focus:ring-0 px-3 py-1 text-gray-600 shadow-sm" placeholder="min">
+                        <span class="mx-3 text-gray-500">-</span>
+                        <input type="number" name="harga_max" id="max" class="w-full border-gray-300 focus:border-primary rounded focus:ring-0 px-3 py-1 text-gray-600 shadow-sm" placeholder="max">
+                    </div>
                 </div>
-            </div>
 
-            <a href="#" class="block w-full py-1 text-center text-white bg-red-600 border border-primary rounded-md">Filter</a>
-
+                <button type="submit" class="block w-full py-1 text-center text-white bg-red-600 border border-primary rounded-md">Filter</button>
         </div>
+        </form>
     </div>
 
     <!-- ./sidebar -->
     <div class="col-span-1 bg-white px-4 pb-6 shadow rounded overflow-hiddenb hidden md:block">
-        <div class="divide-y divide-gray-200 space-y-5">
-            <div>
-                <h3 class="text-xl text-gray-800 mb-3 uppercase font-medium">Kategori</h3>
-                <div class="space-y-2">
-                    <div class="flex items-center">
-                        <input type="checkbox" name="cat-1" id="cat-1" class="text-primary focus:ring-0 rounded-sm cursor-pointer">
-                        <label for="cat-1" class="text-gray-600 ml-3 cusror-pointer">Makanan</label>
-                        <div class="ml-auto text-gray-600 text-sm">({{$total_makanan}})</div>
-                    </div>
-                    <div class="flex items-center">
-                        <input type="checkbox" name="cat-2" id="cat-2" class="text-primary focus:ring-0 rounded-sm cursor-pointer">
-                        <label for="cat-2" class="text-gray-600 ml-3 cusror-pointer">Minuman</label>
-                        <div class="ml-auto text-gray-600 text-sm">({{$total_minuman}})</div>
+        <form action="{{route('filter_produk')}}" method="post">
+            @csrf
+            <div class="divide-y divide-gray-200 space-y-5">
+                <div>
+                    <h3 class="text-xl text-gray-800 mb-3 uppercase font-medium">Kategori</h3>
+                    <div class="space-y-2">
+                        <div class="flex items-center">
+                            <input type="checkbox" name="jenis_makanan[]" id="cat-1" value="Makanan" class="text-primary focus:ring-0 rounded-sm cursor-pointer">
+                            <label for="cat-1" class="text-gray-600 ml-3 cusror-pointer">Makanan</label>
+                            <div class="ml-auto text-gray-600 text-sm">({{$total_makanan}})</div>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="checkbox" name="jenis_makanan[]" id="cat-2" value="Minuman" class="text-primary focus:ring-0 rounded-sm cursor-pointer">
+                            <label for="cat-2" class="text-gray-600 ml-3 cusror-pointer">Minuman</label>
+                            <div class="ml-auto text-gray-600 text-sm">({{$total_minuman}})</div>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="pt-4">
-                <h3 class="text-xl text-gray-800 mb-3 uppercase font-medium">Penjual</h3>
-                <div class="space-y-2">
-
-                    @foreach($penjual as $data)
-                    <div class="flex items-center">
-                        <input type="checkbox" name="brand-1" id="brand-1" class="text-primary focus:ring-0 rounded-sm cursor-pointer">
-                        <label for="brand-1" class="text-gray-600 ml-3 cusror-pointer">{{$data->nama_toko}}</label>
-                        <div class="ml-auto text-gray-600 text-sm">({{$data->product_count}})</div>
+                <div class="pt-4">
+                    <h3 class="text-xl text-gray-800 mb-3 uppercase font-medium">Penjual</h3>
+                    <div class="space-y-2">
+                        @foreach($penjual as $data)
+                        <div class="flex items-center">
+                            <input type="checkbox" name="nama_penjual[]" value="{{$data->id}}" id="brand-1" class="text-primary focus:ring-0 rounded-sm cursor-pointer">
+                            <label for="brand-1" class="text-gray-600 ml-3 cusror-pointer">{{$data->nama_toko}}</label>
+                            <div class="ml-auto text-gray-600 text-sm">({{$data->product_count}})</div>
+                        </div>
+                        @endforeach
                     </div>
-                    @endforeach
                 </div>
-            </div>
 
-            <div class="pt-4">
-                <h3 class="text-xl text-gray-800 mb-3 uppercase font-medium">Price</h3>
-                <div class="mt-4 flex items-center">
-                    <input type="text" name="min" id="min" class="w-full border-gray-300 focus:border-primary rounded focus:ring-0 px-3 py-1 text-gray-600 shadow-sm" placeholder="min">
-                    <span class="mx-3 text-gray-500">-</span>
-                    <input type="text" name="max" id="max" class="w-full border-gray-300 focus:border-primary rounded focus:ring-0 px-3 py-1 text-gray-600 shadow-sm" placeholder="max">
+                <div class="pt-4">
+                    <h3 class="text-xl text-gray-800 mb-3 uppercase font-medium">Price</h3>
+                    <div class="mt-4 flex items-center">
+                        <input type="number" name="harga_min" id="min" class="w-full border-gray-300 focus:border-primary rounded focus:ring-0 px-3 py-1 text-gray-600 shadow-sm" placeholder="min">
+                        <span class="mx-3 text-gray-500">-</span>
+                        <input type="number" name="harga_max" id="max" class="w-full border-gray-300 focus:border-primary rounded focus:ring-0 px-3 py-1 text-gray-600 shadow-sm" placeholder="max">
+                    </div>
                 </div>
-            </div>
 
-            <a href="#" class="block w-full py-1 text-center text-white bg-red-600 border border-primary rounded-md">Filter</a>
-        </div>
+                <button type="submit" class="block w-full py-1 text-center text-white bg-red-600 border border-primary rounded-md">Filter</button>
+            </div>
+        </form>
     </div>
     <!-- products -->
     <div class="col-span-3">
@@ -159,8 +162,13 @@
                         <div class="text-xs text-gray-500 ml-3">({{$rating}})</div>
                     </div>
                 </div>
+                @if($data->stok != 0)
                 <a href="{{route('pesanan-create',$data->id)}}" class="block w-full py-1 text-center text-white bg-red-600 border border-primary rounded-b hover:bg-transparent hover:text-primary transition">Tambah
                     ke Pesanan</a>
+                @else
+                <button disabled class="block w-full py-1 text-center text-white bg-red-300 border border-red-300 rounded-b ">Tambah
+                    ke Pesanan</button>
+                @endif
             </div>
             @endforeach
         </div>

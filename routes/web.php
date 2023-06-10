@@ -28,6 +28,8 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', [ProductController::class, 'halaman_awal'])->name('halaman_awal');
 
 Route::get('/katalog_produk', [KatalogProdukController::class, 'index'])->name('katalog_produk');
+Route::post('/filter_produk', [KatalogProdukController::class, 'filter_produk'])->name('filter_produk');
+Route::post('/search_produk', [KatalogProdukController::class, 'store'])->name('search_produk');
 Route::get('/detail_produk/{id}', [KatalogProdukController::class, 'show'])->name('detail_produk');
 
 Route::get('/about_us', function () {

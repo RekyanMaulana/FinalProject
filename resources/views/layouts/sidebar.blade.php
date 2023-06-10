@@ -14,14 +14,14 @@
         <!-- Messages Dropdown Menu -->
         <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#" style="text-align: right">
-                <img src="{{url('assets/admin/dist/img/',Auth::user()->profile->foto)}}" class="img-circle mb-2" width="35px" alt="User Image">
+                <img src="{{url('assets/profile/',Auth::user()->profile->foto)}}" class="img-circle mb-2" width="35px" alt="User Image">
                 <span class="ml-w">{{ Auth::user()->profile->nama }}</span>
             </a>
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 <a href="#" class="dropdown-item">
                     <!-- Message Start -->
                     <div class="media">
-                        <img src="{{url('assets/admin/dist/img/',Auth::user()->profile->foto)}}" class="img-circle mr-3 mb-2" width="50px" alt="User Image">
+                        <img src="{{url('assets/profile/',Auth::user()->profile->foto)}}" class="img-circle mr-3 mb-2" width="50px" alt="User Image">
                         <div class="media-body">
                             <h3 class="dropdown-item-title">
                                 {{ Auth::user()->profile->nama }}

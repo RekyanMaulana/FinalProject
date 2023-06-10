@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Favorit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FavoritController extends Controller
 {
@@ -12,7 +14,9 @@ class FavoritController extends Controller
     public function index()
     {
         $title = "Wishlist";
-        return view('pages-user.wishlist', compact('title'));
+        $favorit = Favorit::where('user_id', Auth::user()->id)->orderBy('created_at', 'desc')->get();
+
+        return view('pages-user.wishlist', compact('title', 'favorit'));
     }
 
     /**
@@ -36,9 +40,18 @@ class FavoritController extends Controller
      */
     public function show(string $id)
     {
-        //
-    }
+        $favorit = Favorit::where('product_id', $id)->first();
 
+        if ($favorit == null) {
+            Favorit::create([
+                'user_id' => Auth::user()->id,
+                'product_id' => $id
+            ]);
+            return back()->with('success', 'Favorit berhasil ditambahkan');
+        } else {
+            return back()->with('warning', 'Favorit sudah pernah ditambahkan');
+        }
+    }
     /**
      * Show the form for editing the specified resource.
      */
@@ -60,6 +73,9 @@ class FavoritController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $data = Favorit::find($id);
+        $data->delete();
+
+        return back()->with('success', 'Favorit berhasil dihapus');
     }
 }

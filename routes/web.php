@@ -102,8 +102,7 @@ Route::group(['middleware' => ['auth', 'role:Siswa']], function () {
         Route::get('/{id}', [PesananController::class, 'show'])->name('pesanan-create');
         Route::post('/store', [PesananController::class, 'store'])->name('pesanan-store');
         Route::delete('/{id}/destroy', [PesananController::class, 'destroy'])->name('pesanan-hapus');
-        Route::post('/minus_quantity',  [PesananController::class, 'minus_quantity'])->name('minus_quantity');
-        Route::post('/plus_quantity',  [PesananController::class, 'plus_quantity'])->name('plus_quantity');
+        Route::post('/update-quantity',  [PesananController::class, 'edit'])->name('update-quantity');
     });
 
     Route::prefix('checkout')->group(function () {

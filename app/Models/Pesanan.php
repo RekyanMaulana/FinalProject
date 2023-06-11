@@ -11,7 +11,7 @@ class Pesanan extends Model
     protected $table = 'pesanan';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'user_id', 'product_id'
+        'user_id', 'product_id', 'quantity'
     ];
 
     public function user()

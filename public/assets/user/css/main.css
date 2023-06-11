@@ -921,6 +921,10 @@ h6 {
     margin-top: 3rem;
 }
 
+.mt-2 {
+    margin-top: 0.5rem;
+}
+
 .mb-6 {
     margin-bottom: 1.5rem;
 }
@@ -1046,7 +1050,7 @@ h6 {
     width: 0.75rem;
 }
 
-.w-1\/2 {
+.w-1-2 {
     width: 50%;
 }
 
@@ -1064,7 +1068,7 @@ h6 {
     width: 2rem;
 }
 
-.w-3\/5 {
+.w-3-5 {
     width: 60%;
 }
 
@@ -1173,6 +1177,10 @@ h6 {
 
 .justify-center {
     justify-content: center;
+}
+
+.text-justify {
+    text-align: justify;
 }
 
 .justify-between {
@@ -1584,7 +1592,7 @@ h6 {
 }
 
 .text-2xl {
-    font-size: 1.3trem;
+    font-size: 1.3rem;
     line-height: 2rem;
 }
 

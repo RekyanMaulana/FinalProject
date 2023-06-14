@@ -7,6 +7,7 @@ use App\Models\Transaksi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use PDF;
 
 class TransaksiController extends Controller
 {
@@ -92,5 +93,38 @@ class TransaksiController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function pdf(){
+        $diproses = Transaksi::with('detail_transaksi.product')
+            ->join('users', 'transaksi.user_id', '=', 'users.id')
+            ->join('profile', 'users.id', '=', 'profile.user_id')
+            ->whereHas('detail_transaksi.product', function ($query) {
+                $query->where('penjual_id', Auth::user()->penjual->id);
+            })
+            ->where('transaksi.status', 'Diproses')
+            ->orderBy('transaksi.created_at', 'desc')
+            ->get();
+        $dikirim = Transaksi::with('detail_transaksi.product')
+            ->join('users', 'transaksi.user_id', '=', 'users.id')
+            ->join('profile', 'users.id', '=', 'profile.user_id')
+            ->whereHas('detail_transaksi.product', function ($query) {
+                $query->where('penjual_id', Auth::user()->penjual->id);
+            })
+            ->where('transaksi.status', 'Dikirim')
+            ->orderBy('transaksi.created_at', 'desc')
+            ->get();
+        $diterima = Transaksi::with('detail_transaksi.product')
+            ->join('users', 'transaksi.user_id', '=', 'users.id')
+            ->join('profile', 'users.id', '=', 'profile.user_id')
+            ->whereHas('detail_transaksi.product', function ($query) {
+                $query->where('penjual_id', Auth::user()->penjual->id);
+            })
+            ->where('transaksi.status', 'Diterima')
+            ->orderBy('transaksi.created_at', 'desc')
+            ->get();
+
+        $pdf = PDF::loadView('pages-penjual.transaksi.transaksi_pdf', compact('diproses', 'dikirim', 'diterima'))->setPaper('a4', 'landscape');
+        return $pdf->stream();
     }
 }

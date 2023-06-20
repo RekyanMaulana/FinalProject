@@ -11,6 +11,7 @@
     })
 </script>
 @endforeach
+<!-- profile feature -->
 <section class="content">
     <div class="container-fluid">
         <!-- Small boxes (Stat box) -->

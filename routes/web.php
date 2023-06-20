@@ -63,11 +63,13 @@ Route::group(['middleware' => ['auth', 'role:Admin']], function () {
 // menu yang dapat di akses hanya user dengan role penjual
 Route::group(['middleware' => ['auth', 'role:Penjual']], function () {
     Route::get('/home_penjual', [HomePenjualController::class, 'index'])->name('home_penjual');
+    Route::get('/product_pdf', [ProductController::class, 'pdf'])->name('produk-pdf');
+    Route::get('/transaksi_pdf', [TransaksiController::class, 'pdf'])->name('transaksi-pdf');
+    Route::get('/product_excel', [ProductController::class, 'excel'])->name('produk-excel');
 
     Route::prefix('produk')->group(function () {
         Route::get('/', [ProductController::class, 'index'])->name('produk');
         Route::get('/create', [ProductController::class, 'create'])->name('produk-create');
-        Route::get('/{id}', [ProductController::class, 'show'])->name('produk-detail');
         Route::get('/{id}/edit', [ProductController::class, 'edit'])->name('produk-edit');
         Route::post('/store', [ProductController::class, 'store'])->name('produk-store');
         Route::put('/{id}/update', [ProductController::class, 'update'])->name('produk-update');

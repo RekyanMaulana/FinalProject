@@ -18,6 +18,10 @@
         <div class="card mb-3">
             <div class="card-body">
                 <button class="btn btn-primary mb-3" onclick="show('<?= route('produk-create') ?>')"><i class="fas fa-plus"></i></i>&nbsp; Tambah Data</button>
+                <div class="card-header">
+                    <a href="{{route('produk-pdf')}}" class="btn btn-danger btn-md"> Export To PDF</a>
+                    <a href="{{route('produk-excel')}}" class="btn btn-success btn-md"> Export To Excel</a>
+                </div>
                 <table id="example1" class="table table-bordered table-striped">
                     <thead>
                         <tr>

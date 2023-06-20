@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
+use PDF;
+use App\Exports\ProductExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ProductController extends Controller
 {
@@ -78,6 +81,7 @@ class ProductController extends Controller
      */
     public function show(string $id)
     {
+        
     }
 
     /**
@@ -184,5 +188,17 @@ class ProductController extends Controller
             ->get();
 
         return view('pages-user.dashboard', compact('title', 'produk', 'rekomendasi'));
+    }
+
+    public function pdf(){
+        $data = Product::where('penjual_id', Auth::user()->penjual->id)->orderBy('created_at', 'desc')->get();
+
+        $pdf = PDF::loadView('pages-penjual.produk.product_pdf', compact('data'))->setPaper('a4', 'landscape');
+        return $pdf->stream();
+    }
+
+    public function excel() 
+    {
+        return Excel::download(new ProductExport, 'product.xlsx');
     }
 }

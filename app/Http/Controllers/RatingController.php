@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ratings;
+use App\Models\Transaksi;
 use Illuminate\Http\Request;
 
 class RatingController extends Controller
@@ -27,7 +29,19 @@ class RatingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rating = Transaksi::find($request->id);
+
+        foreach ($rating->detail_transaksi as $data) {
+            $nilai = 'rating_' . $data->id;
+            $review = 'review_' . $data->id;
+
+            Ratings::create([
+                'rating' => $request->$nilai,
+                'review' => $request->$review,
+                'detail_transaksi_id' => $data->id
+            ]);
+        }
+        return redirect('history')->with('success','Review Berhasil');
     }
 
     /**
@@ -35,7 +49,11 @@ class RatingController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $title = "History";
+        $rating = Transaksi::find($id);
+
+        // dd($history->detail_transaksi[0]);
+        return view('pages-user.rating', compact('title', 'rating'));
     }
 
     /**

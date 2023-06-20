@@ -58,7 +58,7 @@
                 <p data-sub-id="{{$ps->id}}" class="sub-quantity text-gray-600">
                     x{{$ps->quantity}}
                 </p>
-                <p data-sub-id="{{$ps->id}}" class="sub-total text-gray-800 font-medium">Rp. {{number_format($total, 0, ",", ".")}}</p>
+                <p data-sub-id="{{$ps->id}}" class="sub-total text-gray-800 font-medium">Rp. {{number_format($ps->product->price * $ps->quantity, 0, ",", ".")}}</p>
             </div>
             @endforeach
         </div>
@@ -69,7 +69,7 @@
         </div>
 
         @if(count($pesanan) != 0)
-        <a href="#" class="block w-full py-3 px-4 text-center text-white bg-red-600 border border-primary rounded-md hover:bg-transparent hover:text-primary transition font-medium">Place
+        <a href="{{route('checkout')}}" class="block w-full py-3 px-4 text-center text-white bg-red-600 border border-primary rounded-md hover:bg-transparent hover:text-primary transition font-medium">Place
             order</a>
         @endif
     </div>

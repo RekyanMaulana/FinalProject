@@ -20,6 +20,7 @@ class TransaksiController extends Controller
         $diproses = Transaksi::with('detail_transaksi.product')
             ->join('users', 'transaksi.user_id', '=', 'users.id')
             ->join('profile', 'users.id', '=', 'profile.user_id')
+            ->select('transaksi.*', 'profile.nama')
             ->whereHas('detail_transaksi.product', function ($query) {
                 $query->where('penjual_id', Auth::user()->penjual->id);
             })
@@ -29,6 +30,7 @@ class TransaksiController extends Controller
         $dikirim = Transaksi::with('detail_transaksi.product')
             ->join('users', 'transaksi.user_id', '=', 'users.id')
             ->join('profile', 'users.id', '=', 'profile.user_id')
+            ->select('transaksi.*', 'profile.nama')
             ->whereHas('detail_transaksi.product', function ($query) {
                 $query->where('penjual_id', Auth::user()->penjual->id);
             })
@@ -38,6 +40,7 @@ class TransaksiController extends Controller
         $diterima = Transaksi::with('detail_transaksi.product')
             ->join('users', 'transaksi.user_id', '=', 'users.id')
             ->join('profile', 'users.id', '=', 'profile.user_id')
+            ->select('transaksi.*', 'profile.nama')
             ->whereHas('detail_transaksi.product', function ($query) {
                 $query->where('penjual_id', Auth::user()->penjual->id);
             })
@@ -52,7 +55,6 @@ class TransaksiController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
@@ -68,7 +70,8 @@ class TransaksiController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $data = Transaksi::find($id);
+        return view('pages-penjual.transaksi.transaksi-detail', compact('data'));
     }
 
     /**
@@ -76,7 +79,10 @@ class TransaksiController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $order =  Transaksi::find($id);
+        $order->status = 'Dikirim';
+        $order->update();
+        return redirect('transaksi')->with('success', 'Produk Telah Dikirim');
     }
 
     /**

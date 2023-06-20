@@ -64,6 +64,18 @@
             </div>
         </div>
 
+
+        <!-- modal -->
+        <div class="modal fade" id="detail_modal_lg" tabindex="-1" aria-labelledby="addLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div id="page_lg">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
         @yield('container')
 
         <form action="" id="delete-form" method="POST">
@@ -175,6 +187,14 @@
                 $('#detail_modal').modal('show');
             });
         }
+
+        function show_lg(url) {
+            $.get(url, function(data) {
+                $("#page_lg").html(data);
+                $('#detail_modal_lg').modal('show');
+            });
+        }
+
 
         var state = false;
 

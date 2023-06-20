@@ -102,8 +102,8 @@
 <div class="container pb-16">
     <h2 class="text-2xl font-medium text-gray-800 uppercase mb-6">Review Products</h2>
     @foreach($ratings as $data)
-    @php $rating_review = ($data->rating != null ) ? round($data->rating, 2) : 0; @endphp
-    <div class="flex border gap-6 p-4 border-gray-200 rounded">
+    @php $rating_review = ($data->ratings->rating != null ) ? round($data->ratings->rating, 2) : 0; @endphp
+    <div class="flex border gap-6 p-4 border-gray-200 rounded mb-3">
         <div class="w-14 h-12">
             <img src="{{url('assets/profile/',$data->transaksi->user->profile->foto)}}" alt="product 6" class="image-top">
         </div>
@@ -116,7 +116,7 @@
                 <span><i class="{{($rating_review <= 3) ? 'far fa-star' : (($rating_review > 3 && $rating_review < 4 ) ? 'fas fa-star-half-alt' : 'fas fa-star')}}"></i></span>
                 <span><i class="{{($rating_review <= 4) ? 'far fa-star' : (($rating_review > 4 && $rating_review < 5 ) ? 'fas fa-star-half-alt' : 'fas fa-star')}}"></i></span>
             </div>
-            <p>{!! $str = preg_replace("/\r?\n/", "<br>", $data->review) !!}</p>
+            <p>{!! $str = preg_replace("/\r?\n/", "<br>", $data->ratings->review) !!}</p>
         </div>
     </div>
     @endforeach

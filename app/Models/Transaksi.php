@@ -9,9 +9,8 @@ class Transaksi extends Model
 {
     use HasFactory;
     protected $table = 'transaksi';
-    protected $primaryKey = 'id';
     protected $fillable = [
-        'total', 'status_transaksi', 'status', 'user_id', 'tanggal', 'lokasi'
+        'id', 'total', 'payment_status', 'midtrans_url', 'midtrans_booking_code', 'status', 'user_id', 'tanggal', 'lokasi'
     ];
 
     public function user()

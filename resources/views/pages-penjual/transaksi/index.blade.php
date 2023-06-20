@@ -31,8 +31,8 @@
                             @endif
                             <td>Rp. {{number_format($diproses->total, 0, ",", ".")}}</td>
                             <td>
-                                <a class="btn btn-primary btn-sm" onclick="show('{{<?= route('produk-detail', $diproses->id) ?>}}')"><i class="fas fa-eye"></i></a>
-                                <a class="btn btn-warning btn-sm" href="{{route('produk-edit',$diproses->id)}}"><i class="fas fa-truck-pickup"></i></a>
+                                <a class="btn btn-primary btn-sm" onclick="show_lg('<?= route('transaksi-detail', $diproses->id) ?>')"><i class="fas fa-eye"></i></a>
+                                <a class="btn btn-warning btn-sm" href="{{route('transaksi-edit',$diproses->id)}}"><i class="fas fa-truck-pickup"></i></a>
                             </td>
                         </tr>
                         @endforeach
@@ -63,12 +63,12 @@
                             <td>{{$dikirim->tanggal}}</td>
                             @if($dikirim->status_pembayaran != 'Lunas')
                             <td><span class="badge badge-danger">Belum Dibayar</span></td>
-                            @elsedikirim
+                            @else
                             <td><span class="badge badge-success">Lunas</span></td>
                             @endif
-                            <td>Rp. {{number_format($dikirim->total_transaksi, 0, ",", ".")}}</td>
+                            <td>Rp. {{number_format($dikirim->total, 0, ",", ".")}}</td>
                             <td>
-                                <a class="btn btn-primary btn-sm" onclick="show('<?= route('produk-detail', $dikirim->id) ?>')"><i class="fas fa-eye"></i></a>
+                                <a class="btn btn-primary btn-sm" onclick="show_lg('<?= route('transaksi-detail', $dikirim->id) ?>')"><i class="fas fa-eye"></i></a>
                             </td>
                         </tr>
                         @endforeach
@@ -103,10 +103,9 @@
                             @else
                             <td><span class="badge badge-success">Lunas</span></td>
                             @endif
-                            <td>Rp. {{number_format($data->total_transaksi, 0, ",", ".")}}</td>
+                            <td>Rp. {{number_format($data->total, 0, ",", ".")}}</td>
                             <td>
-                                <a class="btn btn-primary btn-sm" onclick="show('<?= route('produk-detail', $data->id) ?>')"><i class="fas fa-eye"></i></a>
-                                <a class="btn btn-warning btn-sm" href="{{route('produk-edit',$data->id)}}"><i class="fas fa-truck-pickup"></i></a>
+                                <a class="btn btn-primary btn-sm" onclick="show_lg('<?= route('transaksi-detail', $data->id) ?>')"><i class="fas fa-eye"></i></a>
                             </td>
                         </tr>
                         @endforeach

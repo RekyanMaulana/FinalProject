@@ -17,11 +17,11 @@
     <div class="col-span-3">
         <div class="px-4 py-3 shadow flex items-center gap-4">
             <div class="flex-shrink-0">
-                <img src="{{url('assets/user/images/avatar.png')}}" alt="profile" class="rounded-full w-14 h-14 border border-gray-200 p-1 object-cover">
+                <img src="{{url('assets/profile',Auth::user()->profile->foto)}}" alt="profile" class="rounded-full w-14 h-14 border border-gray-200 p-1 object-cover">
             </div>
             <div class="flex-grow">
                 <p class="text-gray-600">Hello,</p>
-                <h4 class="text-gray-800 font-medium">John Doe</h4>
+                <h4 class="text-gray-800 font-medium">{{Auth::user()->profile->nama}}</h4>
             </div>
         </div>
 
@@ -42,22 +42,28 @@
             </div>
 
             <div class="space-y-1 pl-8 pt-4">
-                <a href="#" class="relative hover:text-red-600 block font-medium capitalize transition">
+                <a href="{{route('history')}}" class="relative hover:text-red-600 block font-medium capitalize transition">
                     <span class="absolute -left-8 top-0 text-base">
                         <i class="fas fa-archive"></i>
                     </span>
                     My order history
                 </a>
-                <a href="#" class="relative hover:text-red-600 block capitalize transition">
-                    My Cancellations
+                <a href="{{route('belum_dibayar')}}" class="relative hover:text-red-600 block capitalize transition">
+                    Belum Dibayar
                 </a>
-                <a href="#" class="relative hover:text-red-600 block capitalize transition">
-                    My reviews
+                <a href="{{route('history')}}" class="relative hover:text-red-600 block capitalize transition">
+                    Diproses
+                </a>
+                <a href="{{route('dikirim')}}" class="relative hover:text-red-600 block capitalize transition">
+                    Dikirim
+                </a>
+                <a href="{{route('diterima')}}" class="relative hover:text-red-600 block capitalize transition">
+                    Diterima
                 </a>
             </div>
 
             <div class="space-y-1 pl-8 pt-4">
-                <a href="#" class="relative text-red-600 font-medium block font-medium capitalize transition">
+                <a href="{{route('favorit')}}" class="relative text-red-600 font-medium block font-medium capitalize transition">
                     <span class="absolute -left-8 top-0 text-base">
                         <i class="fas fa-heart"></i>
                     </span>
@@ -84,6 +90,7 @@
 
     <!-- wishlist -->
     <div class="col-span-9 space-y-4">
+        @if(count($favorit) != null)
         @foreach($favorit as $data)
         <div class="flex items-center justify-between border gap-6 p-4 border-gray-200 rounded">
             <div class="w-28">
@@ -102,7 +109,7 @@
             <div class="text-primary text-lg font-semibold">Rp. {{number_format($data->product->price, 0, ",", ".")}}</div>
 
             @if($data->product->stok != 0)
-            <a href="{{route('pesanan-create',$data->id)}}" class="px-6 py-2 text-center text-sm text-white bg-red-600 border border-primary rounded hover:bg-transparent hover:text-primary transition uppercase font-roboto font-medium">add
+            <a href="{{route('pesanan-create',$data->product_id )}}" class="px-6 py-2 text-center text-sm text-white bg-red-600 border border-primary rounded hover:bg-transparent hover:text-primary transition uppercase font-roboto font-medium">add
                 to cart</a>
             @else
             <button disabled class="px-6 py-2 text-center text-sm text-white bg-red-300 border border-red-300 rounded">add
@@ -114,6 +121,16 @@
             </a>
         </div>
         @endforeach
+        @else
+        <div class="text-center pt-5 pt-4">
+            <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+            <lord-icon src="https://cdn.lordicon.com/hqrgkqvs.json" trigger="hover" colors="outline:#121331,primary:#f28ba8,secondary:#ebe6ef" style="width:190px;height:190px">
+            </lord-icon>
+            <h4 class="pt-2">Favoritmu kosong nih !!</h4>
+            <p>Yuk Pilih Sekarang</p>
+            <br>
+        </div>
+        @endif
     </div>
     <!-- ./wishlist -->
 

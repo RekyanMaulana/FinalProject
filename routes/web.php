@@ -10,6 +10,7 @@ use App\Http\Controllers\KatalogProdukController;
 use App\Http\Controllers\PenjualController;
 use App\Http\Controllers\PesananController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\RatingController;
 use App\Http\Controllers\TransaksiController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -109,14 +110,31 @@ Route::group(['middleware' => ['auth', 'role:Siswa']], function () {
 
     Route::prefix('checkout')->group(function () {
         Route::get('/', [CheckoutController::class, 'index'])->name('checkout');
-        Route::post('/{id}', [CheckoutController::class, 'show'])->name('checkout-create');
+        Route::get('/{id}', [CheckoutController::class, 'show'])->name('change-status');
         Route::post('/store', [CheckoutController::class, 'store'])->name('checkout-store');
-        Route::delete('/{id}/destroy', [CheckoutController::class, 'destroy'])->name('checkout-hapus');
+    });
+
+    Route::prefix('profile')->group(function () {
+        Route::post('/store', [CheckoutController::class, 'store'])->name('checkout-store');
     });
 
     Route::prefix('history')->group(function () {
         Route::get('/', [HistoryController::class, 'index'])->name('history');
-        Route::post('/{id}', [HistoryController::class, 'show'])->name('history-create');
+        Route::get('/dikirim', [HistoryController::class, 'dikirim'])->name('dikirim');
+        Route::get('/diterima', [HistoryController::class, 'diterima'])->name('diterima');
+        Route::get('/belum_dibayar', [HistoryController::class, 'belum_dibayar'])->name('belum_dibayar');
+        Route::get('/{id}', [HistoryController::class, 'show'])->name('history-show');
+        Route::get('/{id}/edit', [HistoryController::class, 'edit'])->name('history-edit');
         Route::put('/{id}/update', [HistoryController::class, 'update'])->name('history-update');
     });
+
+    Route::prefix('rating')->group(function () {
+        Route::get('/{id}', [RatingController::class, 'show'])->name('rating-show');
+        Route::post('/store', [RatingController::class, 'store'])->name('rating-store');
+    });
+
+
+    //midtrans gateway
+    Route::get('payment/success', [CheckoutController::class, 'midtransCallBack']);
+    Route::post('payment/success', [CheckoutController::class, 'midtransCallBack']);
 });

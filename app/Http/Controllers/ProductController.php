@@ -81,10 +81,7 @@ class ProductController extends Controller
      */
     public function show(string $id)
     {
-        $title = 'Detail Produk';
-        $data = Product::find($id);
-        $product_gallery = Product_Galleries::where('product_id', $id)->orderBy('created_at', 'desc')->get();
-        return view('pages-penjual.produk.detail', compact('data', 'product_gallery'));
+        
     }
 
     /**

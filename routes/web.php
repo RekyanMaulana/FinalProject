@@ -69,7 +69,6 @@ Route::group(['middleware' => ['auth', 'role:Penjual']], function () {
     Route::prefix('produk')->group(function () {
         Route::get('/', [ProductController::class, 'index'])->name('produk');
         Route::get('/create', [ProductController::class, 'create'])->name('produk-create');
-        Route::get('/{id}', [ProductController::class, 'show'])->name('produk-detail');
         Route::get('/{id}/edit', [ProductController::class, 'edit'])->name('produk-edit');
         Route::post('/store', [ProductController::class, 'store'])->name('produk-store');
         Route::put('/{id}/update', [ProductController::class, 'update'])->name('produk-update');

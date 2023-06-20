@@ -27,7 +27,7 @@
             <td>{{$x++}}</td>
             <td>{{$diproses->nama}}</td>
             <td>{{$diproses->tanggal}}</td>
-            @if($diproses->status_pembayaran != 'Lunas')
+            @if($diproses->payment_status == 'waiting')
             <td><font color="red">Belum Dibayar</font></td>
             @else
             <td ><font color="green">Lunas</font></td>
@@ -56,7 +56,7 @@
             <td>{{$x++}}</td>
             <td>{{$dikirim->nama}}</td>
             <td>{{$dikirim->tanggal}}</td>
-            @if($dikirim->status_pembayaran != 'Lunas')
+            @if($dikirim->payment_status == 'waiting')
             <td><font color="red">Belum Dibayar</font></td>
             @else
             <td><font color="green">Lunas</font></td>
@@ -85,7 +85,7 @@
             <td>{{$x++}}</td>
             <td>{{$data->nama}}</td>
             <td>{{$data->tanggal}}</td>
-            @if($data->status_pembayaran != 'Lunas')
+            @if($data->payment_status == 'waiting')
             <td><font color="red">Belum Dibayar</font></td>
             @else
             <td><font color="green">Lunas</font></td>

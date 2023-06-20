@@ -18,6 +18,10 @@
         <div class="card mb-3">
             <div class="card-body">
                 <button class="btn btn-primary mb-3" onclick="show('<?= route('produk-create') ?>')"><i class="fas fa-plus"></i></i>&nbsp; Tambah Data</button>
+                <div class="card-header">
+                    <a href="{{route('produk-pdf')}}" class="btn btn-danger btn-md"> Export To PDF</a>
+                    <a href="{{route('produk-excel')}}" class="btn btn-success btn-md"> Export To Excel</a>
+                </div>
                 <table id="example1" class="table table-bordered table-striped">
                     <thead>
                         <tr>
@@ -40,6 +44,7 @@
                             <td>Rp. {{number_format($data->price, 0, ",", ".")}}</td>
                             <td style="width: 230px;">
                                 <a class="btn btn-info btn-sm mt-1" href="{{route('produk-edit', $data->id)}}"><i class="fas fa-pencil-alt"></i>&nbsp;&nbsp;Edit</a>
+                                <a class="btn btn-primary btn-sm mt-1" href="{{route('produk-detail', $data->id)}}"><i class="fas fa-info-circle"></i>&nbsp;&nbsp;Detail</a>
                                 <a class="btn btn-danger btn-sm mt-1" onclick="notificationforDelete(event, this)" href="{{route('produk-hapus',$data->id)}}"><i class="fas fa-trash"></i>&nbsp;&nbsp; Delete</a>
                             </td>
                         </tr>

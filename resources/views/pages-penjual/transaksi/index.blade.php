@@ -6,6 +6,9 @@
         <!-- Small boxes (Stat box) -->
         <div class="card mb-3">
             <div class="card-body">
+                <div class="card-header">
+                    <a href="{{route('transaksi-pdf')}}" class="btn btn-danger btn-md"> Export To PDF</a>
+                </div>
                 <h4 class="">Produk Diproses</h4>
                 <table id="example1" class="table table-bordered table-striped">
                     <thead>

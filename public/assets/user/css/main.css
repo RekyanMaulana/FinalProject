@@ -1910,6 +1910,11 @@ h6 {
     text-transform: uppercase
 }
 
+.profile {
+    width: 15%;
+    border-radius: 50px;
+}
+
 @media (min-width: 768px) {
     .md\:block {
         display: block;

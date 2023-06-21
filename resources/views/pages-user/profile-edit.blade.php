@@ -34,10 +34,10 @@
                     </span>
                     Profile
                 </a>
-                <a href="{{route('profile')}}" class="relative text-red-600 block transition">
+                <a href="{{route('profile')}}" class="relative hover:text-red-600 block transition">
                     Detail Profile
                 </a>
-                <a href="{{route('profile-edit',Auth::user()->id)}}" class="relative hover:text-red-600 block transition">
+                <a href="{{route('profile-edit',Auth::user()->id)}}" class="relative text-red-600 block transition">
                     Edit Profile
                 </a>
             </div>
@@ -80,42 +80,61 @@
     <!-- profile -->
     <div class="col-span-9 shadow rounded px-6 pt-5 pb-7">
         <h4 class="text-lg font-medium capitalize mb-4">
-            Detail Profile
+            Edit Profile
         </h4>
+        <form method="POST" action="{{ route('profile-update',Auth::user()->id) }}" enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
+            <div class="space-y-4">
+                <div class="wfull">
+                    <div>
+                        <label for="nama">Nama Pengguna</label>
+                        <input type="text" name="nama" id="nama" class="input-box rounded " placeholder="Input Nama" value="{{$user->profile->nama}}">
+                    </div>
+                </div>
+                <div class="wfull">
+                    <div>
+                        <label for="email">Email</label>
+                        <input type="email" name="email" id="email" class="input-box rounded" placeholder="Input Email" value="{{$user->email}}">
+                    </div>
+                </div>
+                <div class="wfull">
+                    <div>
+                        <label for="username">Username</label>
+                        <input type="text" name="username" id="username" class="input-box rounded " placeholder="Input Username" value="{{$user->username}}">
+                    </div>
+                </div>
+                <div class="wfull">
+                    <div>
+                        <label for="no_telp">NO Telp</label>
+                        <input type="number" name="no_telp" id="no_telp" class="input-box rounded " placeholder="Input No Telp" value="{{$user->profile->no_telp}}">
+                    </div>
+                </div>
+                <div class="wfull">
+                    <div>
+                        <label for="alamat">Alamat</label>
+                        <textarea rows="4" name="alamat" id="alamat" class="input-box rounded " style="border-color: gray;" placeholder="Input Alamat">{{$user->profile->alamat}}</textarea>
+                    </div>
+                </div>
+                <div class="wfull">
+                    <div>
+                        <label for="password">Reset Password</label>
+                        <input type="password" name="password" minlength="8" id="password" class="input-box rounded " placeholder="Input Password">
+                    </div>
+                </div>
+                <img src="{{url('assets/profile/'.$user->profile->foto)}}" alt="" width="10%">
+                <div class="wfull">
+                    <div>
+                        <label for="foto">Foto</label>
+                        <input type="file" name="foto" id="foto" class="input-box rounded border" style="border-color: gray;">
+                    </div>
+                </div>
+            </div>
 
-        <div class="space-y-4">
-            <div class="w-full">
-                <center>
-                    <img src="{{url('assets/profile/'.Auth::user()->profile->foto)}}" alt="" width="10%" class="profile">
-                </center>
+            <div class="mt-4">
+                <button type="submit" class="py-3 px-4 text-center text-white bg-red-600 border border-primary rounded-md hover:bg-transparent hover:text-primary transition font-medium">Simpan</button>
             </div>
-            <div class="grid grid-cols-2 gap-4" style="padding-left: 20%;">
-                <div>
-                    <p for="first" style="font-weight: bold;">Nama Pengguna</p>
-                    <p style="padding-top: 1rem;">{{Auth::user()->profile->nama}}</p>
-                </div>
-                <div>
-                    <p for="first" style="font-weight: bold;">Email</p>
-                    <p style="padding-top: 1rem;">{{Auth::user()->email}}</p>
-                </div>
-            </div>
-            <div class="grid grid-cols-2 gap-4" style="padding-left: 20%;">
-                <div>
-                    <p for="first" style="font-weight: bold;">Username</p>
-                    <p style="padding-top: 1rem;">{{Auth::user()->username}}</p>
-                </div>
-                <div>
-                    <p for="first" style="font-weight: bold;">No Telp</p>
-                    <p style="padding-top: 1rem;">{{(Auth::user()->profile->no_telp == null) ? '-' : Auth::user()->profile->no_telp}}</p>
-                </div>
-            </div>
-            <div class="w-full" style="padding-left: 20%;">
-                <div>
-                    <p for="first" style="font-weight: bold;">Alamat</p>
-                    <p style="padding-top: 1rem;">{{(Auth::user()->profile->alamat == null) ? '-' : Auth::user()->profile->alamat}}</p>
-                </div>
-            </div>
-        </div>
+        </form>
     </div>
     <!-- ./profile -->
 

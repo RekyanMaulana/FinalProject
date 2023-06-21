@@ -16,7 +16,7 @@ class PenjualController extends Controller
     public function index()
     {
         $title = "Data Penjual";
-        $data = User::whereNot('role', 'Admin')->orderBy('created_at', 'desc')->get();
+        $data = User::where('role', 'Penjual')->orderBy('created_at', 'desc')->get();
         return view('pages-admin.user.index', compact('title', 'data'));
     }
 

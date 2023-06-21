@@ -31,7 +31,7 @@
                 </div>
                 <div class="text-xs leading-3">Pesanan</div>
             </a>
-            <a href="{{route('home')}}" class="text-center text-gray-700 hover:text-primary transition relative">
+            <a href="{{route('profile')}}" class="text-center text-gray-700 hover:text-primary transition relative">
                 <div class="text-2xl">
                     <i class="fas fa-user"></i>
                 </div>

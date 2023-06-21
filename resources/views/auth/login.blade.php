@@ -38,7 +38,6 @@
                     <input type="checkbox" name="remember" id="remember" class="text-primary focus:ring-0 rounded-sm cursor-pointer">
                     <label for="remember" class="text-gray-600 ml-3 cursor-pointer">Remember me</label>
                 </div>
-                <a href="#" class="text-primary">Forgot password</a>
             </div>
             <div class="mt-4">
                 <button type="submit" class="block w-full py-2 text-center text-white bg-red-600 border border-primary rounded hover:bg-transparent hover:text-primary transition uppercase font-roboto font-medium">Login</button>

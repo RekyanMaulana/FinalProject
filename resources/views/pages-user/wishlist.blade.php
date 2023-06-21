@@ -27,17 +27,17 @@
 
         <div class="mt-6 bg-white shadow rounded p-4 divide-y divide-gray-200 space-y-4 text-gray-600">
             <div class="space-y-1 pl-8">
-                <a href="#" class="relative hover:text-red-600 block capitalize transition">
-                    Manage account
+                <a href="{{route('profile')}}" class="relative hover:text-red-600 block capitalize transition">
+                    <span class="absolute -left-8 top-0 text-base">
+                        <i class="fas fa-user"></i>
+                    </span>
+                    Profile
                 </a>
-                <a href="#" class="relative hover:text-red-600 block capitalize transition">
-                    Profile information
+                <a href="{{route('profile')}}" class="relative hover:text-red-600 block transition">
+                    Detail Profile
                 </a>
-                <a href="#" class="relative hover:text-red-600 block capitalize transition">
-                    Manage addresses
-                </a>
-                <a href="#" class="relative hover:text-red-600 block capitalize transition">
-                    Change password
+                <a href="{{route('profile-edit',Auth::user()->id)}}" class="relative hover:text-red-600 block transition">
+                    Edit Profile
                 </a>
             </div>
 

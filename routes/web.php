@@ -12,6 +12,8 @@ use App\Http\Controllers\PesananController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RatingController;
 use App\Http\Controllers\TransaksiController;
+use App\Http\Controllers\ProfileController;
+use App\Models\Profile;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 /*
@@ -90,6 +92,11 @@ Route::group(['middleware' => ['auth', 'role:Penjual']], function () {
 });
 
 
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/edit_profile/{id}', [ProfileController::class, 'edit']);
+    Route::put('/edit_profile/{id}/update', [ProfileController::class, 'update'])->name('profile-update');
+});
+
 // menu yang dapat di akses hanya user dengan role User
 Route::group(['middleware' => ['auth', 'role:Siswa']], function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
@@ -98,6 +105,11 @@ Route::group(['middleware' => ['auth', 'role:Siswa']], function () {
         Route::get('/', [FavoritController::class, 'index'])->name('favorit');
         Route::get('/{id}', [FavoritController::class, 'show'])->name('favorit-create');
         Route::delete('/{id}/destroy', [FavoritController::class, 'destroy'])->name('favorit-hapus');
+    });
+
+    Route::prefix('profile')->group(function () {
+        Route::get('/', [ProfileController::class, 'index'])->name('profile');
+        Route::get('/{id}', [ProfileController::class, 'show'])->name('profile-edit');
     });
 
     Route::prefix('pesanan')->group(function () {
@@ -132,6 +144,7 @@ Route::group(['middleware' => ['auth', 'role:Siswa']], function () {
         Route::get('/{id}', [RatingController::class, 'show'])->name('rating-show');
         Route::post('/store', [RatingController::class, 'store'])->name('rating-store');
     });
+
 
 
     //midtrans gateway

@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Product;
-use App\Models\Product_Galleries;
 
 class Product_GalleriesController extends Controller
 {
@@ -14,10 +12,6 @@ class Product_GalleriesController extends Controller
     public function index()
     {
         //
-        $product_galleries = Product_Galleries::join('product', 'product_galleries.product_id', '=', 'product.id')
-        ->select('product_galleries.*', 'product.nama as product')
-        ->get();
-        return view('admin.product_galleries.index', compact('product_galleries'));
     }
 
     /**

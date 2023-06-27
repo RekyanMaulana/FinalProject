@@ -14,7 +14,8 @@ class Product_Galleries extends Model
         'foto', 'product_id'
     ];
 
-    public function product(){
-        return $this->belongsTO(Product::class);
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
     }
 }

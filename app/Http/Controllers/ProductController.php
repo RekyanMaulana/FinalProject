@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use PDF;
 use App\Exports\ProductExport;
+use App\Models\Penjual;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ProductController extends Controller
@@ -21,7 +22,11 @@ class ProductController extends Controller
     public function index()
     {
         $title = "Data Produk";
-        $data = Product::where('penjual_id', Auth::user()->penjual->id)->orderBy('created_at', 'desc')->get();
+        if (Auth::user()->role == 'Penjual') {
+            $data = Product::where('penjual_id', Auth::user()->penjual->id)->orderBy('created_at', 'desc')->get();
+        } else {
+            $data = Product::orderBy('created_at', 'desc')->get();
+        }
         return view('pages-penjual.produk.index', compact('title', 'data'));
     }
 
@@ -31,7 +36,8 @@ class ProductController extends Controller
     public function create()
     {
         $title = 'Data Produk';
-        return view('pages-penjual.produk.create', compact('title'));
+        $penjual = Penjual::orderBy('created_at', 'desc')->get();
+        return view('pages-penjual.produk.create', compact('title', 'penjual'));
     }
 
     /**
@@ -43,6 +49,13 @@ class ProductController extends Controller
             'foto.*' => 'required|image|mimes:jpeg,png,jpg,gif',
         ]);
 
+
+        if (Auth::user()->role == 'Penjual') {
+            $penjual_id = Auth::user()->penjual->id;
+        } else {
+            $penjual_id = $request->penjual_id;
+        }
+
         $id = mt_rand(1000, 99999);
         $data = Product::create([
             'id' => $id,
@@ -51,7 +64,7 @@ class ProductController extends Controller
             'price' => $request->price,
             'stok' => $request->stok,
             'deskripsi_barang' => $request->deskripsi_barang,
-            'penjual_id' => Auth::user()->penjual->id
+            'penjual_id' => $penjual_id
         ]);
 
         if ($request->hasFile('foto')) {
@@ -81,7 +94,6 @@ class ProductController extends Controller
      */
     public function show(string $id)
     {
-        
     }
 
     /**
@@ -91,8 +103,9 @@ class ProductController extends Controller
     {
         $title = 'Edit Data Produk';
         $data = Product::find($id);
+        $penjual = Penjual::orderBy('created_at', 'desc')->get();
         $product_gallery = Product_Galleries::where('product_id', $id)->orderBy('created_at', 'desc')->get();
-        return view('pages-penjual.produk.update', compact('title', 'data', 'product_gallery'));
+        return view('pages-penjual.produk.update', compact('title', 'data', 'product_gallery', 'penjual'));
     }
 
     /**
@@ -110,6 +123,10 @@ class ProductController extends Controller
         $data->price = $request->price;
         $data->stok =  $data->stok + $request->tambah_stok - $request->kurang_stok;
         $data->deskripsi_barang = $request->deskripsi_barang;
+
+        if (Auth::user()->role == 'Admin') {
+            $data->penjual_id  = $request->penjual_id;
+        }
 
         if ($request->hasFile('foto')) {
             $example = $request->file('foto');
@@ -154,7 +171,7 @@ class ProductController extends Controller
         }
     }
 
-   
+
 
     public function hapus_gallery($id)
     {
@@ -190,14 +207,15 @@ class ProductController extends Controller
         return view('pages-user.dashboard', compact('title', 'produk', 'rekomendasi'));
     }
 
-    public function pdf(){
+    public function pdf()
+    {
         $data = Product::where('penjual_id', Auth::user()->penjual->id)->orderBy('created_at', 'desc')->get();
 
         $pdf = PDF::loadView('pages-penjual.produk.product_pdf', compact('data'))->setPaper('a4', 'landscape');
         return $pdf->stream();
     }
 
-    public function excel() 
+    public function excel()
     {
         return Excel::download(new ProductExport, 'product.xlsx');
     }

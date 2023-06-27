@@ -37,7 +37,7 @@ Route::get('/detail_produk/{id}', [KatalogProdukController::class, 'show'])->nam
 
 Route::get('/about_us', function () {
     $title = "About Us";
-    return view('pages-user.aboutUS', compact('title'));
+    return view('pages-user.aboutUs', compact('title'));
 })->name('about_us');
 
 Route::get('/contact_us', function () {

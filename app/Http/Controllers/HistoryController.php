@@ -14,7 +14,7 @@ class HistoryController extends Controller
     public function index()
     {
         $title = "diproses";
-        $history = Transaksi::where('transaksi.user_id', Auth::user()->id)->where('payment_status', '!=', 'waiting')->where('status', 'Diproses')->orderBy('transaksi.created_at', 'desc')->get();
+        $history = Transaksi::where('transaksi.user_id', Auth::user()->id)->where('payment_status', '!=', 'waiting')->where('payment_status', '!=', 'pending')->where('status', 'Diproses')->orderBy('transaksi.created_at', 'desc')->get();
 
         // dd($history->detail_transaksi[0]);
         return view('pages-user.history', compact('title', 'history'));
@@ -23,7 +23,7 @@ class HistoryController extends Controller
     public function dikirim()
     {
         $title = "dikirim";
-        $history = Transaksi::where('transaksi.user_id', Auth::user()->id)->where('payment_status', '!=', 'waiting')->where('status', 'Dikirim')->orderBy('transaksi.created_at', 'desc')->get();
+        $history = Transaksi::where('transaksi.user_id', Auth::user()->id)->where('payment_status', '!=', 'waiting')->where('payment_status', '!=', 'pending')->where('status', 'Dikirim')->orderBy('transaksi.created_at', 'desc')->get();
 
         // dd($history->detail_transaksi[0]);
         return view('pages-user.history', compact('title', 'history'));
@@ -32,7 +32,7 @@ class HistoryController extends Controller
     public function diterima()
     {
         $title = "diterima";
-        $history = Transaksi::where('transaksi.user_id', Auth::user()->id)->where('payment_status', '!=', 'waiting')->where('status', 'Diterima')->orderBy('transaksi.created_at', 'desc')->get();
+        $history = Transaksi::where('transaksi.user_id', Auth::user()->id)->where('payment_status', '!=', 'waiting')->where('payment_status', '!=', 'pending')->where('status', 'Diterima')->orderBy('transaksi.created_at', 'desc')->get();
 
         // dd($history->detail_transaksi[0]);
         return view('pages-user.history', compact('title', 'history'));
@@ -42,7 +42,7 @@ class HistoryController extends Controller
     public function belum_dibayar()
     {
         $title = "Belum Dibayar";
-        $history = Transaksi::where('transaksi.user_id', Auth::user()->id)->where('payment_status', '=', 'waiting')->orderBy('transaksi.created_at', 'desc')->get();
+        $history = Transaksi::where('transaksi.user_id', Auth::user()->id)->whereRaw('payment_status = "waiting"  OR payment_status ="pending"')->orderBy('transaksi.created_at', 'desc')->get();
 
         // dd($history->detail_transaksi[0]);
         return view('pages-user.history', compact('title', 'history'));

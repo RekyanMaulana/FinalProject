@@ -103,7 +103,7 @@
                 </div>
                 <div class="text-primary text-lg font-semibold">Rp. {{number_format($data->total, 0, ",", ".")}}</div>
 
-                @if($data->payment_status == 'waiting')
+                @if($data->payment_status == 'waiting' || $data->payment_status == 'pending')
                 <a href="{{$data->midtrans_url}}" class="px-6 py-2 text-center text-sm text-white bg-red-600 border border-primary rounded hover:bg-transparent hover:text-primary transition uppercase font-roboto font-medium">Bayar</a>
                 @else
                 <div class="px-6 py-2 bg-transparent"></div>

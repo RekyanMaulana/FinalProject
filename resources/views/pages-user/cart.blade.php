@@ -16,7 +16,7 @@
     <div class="col-span-8  p-4 rounded">
         @if(count($pesanan) != 0)
         @foreach($pesanan as $ps)
-        <div class="flex items-center container border gap-6 p-4 pr-12 border-gray-200 rounded">
+        <div class="flex items-center container border gap-6 p-4 pr-12 border-gray-200 rounded  mb-2">
             <div class="w-28">
                 <img src="{{url('assets/produk',$ps->product->product_galleries[0]->foto)}}" alt="product 6" style="height: 80px;" class="w-full">
             </div>

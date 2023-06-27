@@ -17,36 +17,60 @@ class TransaksiController extends Controller
     public function index()
     {
         $title = 'Manajemen Transaksi';
-        $diproses = Transaksi::with('detail_transaksi.product')
-            ->join('users', 'transaksi.user_id', '=', 'users.id')
-            ->join('profile', 'users.id', '=', 'profile.user_id')
-            ->select('transaksi.*', 'profile.nama')
-            ->whereHas('detail_transaksi.product', function ($query) {
-                $query->where('penjual_id', Auth::user()->penjual->id);
-            })
-            ->where('transaksi.status', 'Diproses')
-            ->orderBy('transaksi.created_at', 'desc')
-            ->get();
-        $dikirim = Transaksi::with('detail_transaksi.product')
-            ->join('users', 'transaksi.user_id', '=', 'users.id')
-            ->join('profile', 'users.id', '=', 'profile.user_id')
-            ->select('transaksi.*', 'profile.nama')
-            ->whereHas('detail_transaksi.product', function ($query) {
-                $query->where('penjual_id', Auth::user()->penjual->id);
-            })
-            ->where('transaksi.status', 'Dikirim')
-            ->orderBy('transaksi.created_at', 'desc')
-            ->get();
-        $diterima = Transaksi::with('detail_transaksi.product')
-            ->join('users', 'transaksi.user_id', '=', 'users.id')
-            ->join('profile', 'users.id', '=', 'profile.user_id')
-            ->select('transaksi.*', 'profile.nama')
-            ->whereHas('detail_transaksi.product', function ($query) {
-                $query->where('penjual_id', Auth::user()->penjual->id);
-            })
-            ->where('transaksi.status', 'Diterima')
-            ->orderBy('transaksi.created_at', 'desc')
-            ->get();
+        if (Auth::user()->role == 'Penjual') {
+            $diproses = Transaksi::with('detail_transaksi.product')
+                ->join('users', 'transaksi.user_id', '=', 'users.id')
+                ->join('profile', 'users.id', '=', 'profile.user_id')
+                ->select('transaksi.*', 'profile.nama')
+                ->whereHas('detail_transaksi.product', function ($query) {
+                    $query->where('penjual_id', Auth::user()->penjual->id);
+                })
+                ->where('transaksi.status', 'Diproses')
+                ->orderBy('transaksi.created_at', 'desc')
+                ->get();
+            $dikirim = Transaksi::with('detail_transaksi.product')
+                ->join('users', 'transaksi.user_id', '=', 'users.id')
+                ->join('profile', 'users.id', '=', 'profile.user_id')
+                ->select('transaksi.*', 'profile.nama')
+                ->whereHas('detail_transaksi.product', function ($query) {
+                    $query->where('penjual_id', Auth::user()->penjual->id);
+                })
+                ->where('transaksi.status', 'Dikirim')
+                ->orderBy('transaksi.created_at', 'desc')
+                ->get();
+            $diterima = Transaksi::with('detail_transaksi.product')
+                ->join('users', 'transaksi.user_id', '=', 'users.id')
+                ->join('profile', 'users.id', '=', 'profile.user_id')
+                ->select('transaksi.*', 'profile.nama')
+                ->whereHas('detail_transaksi.product', function ($query) {
+                    $query->where('penjual_id', Auth::user()->penjual->id);
+                })
+                ->where('transaksi.status', 'Diterima')
+                ->orderBy('transaksi.created_at', 'desc')
+                ->get();
+        } else {
+            $diproses = Transaksi::with('detail_transaksi.product')
+                ->join('users', 'transaksi.user_id', '=', 'users.id')
+                ->join('profile', 'users.id', '=', 'profile.user_id')
+                ->select('transaksi.*', 'profile.nama')
+                ->where('transaksi.status', 'Diproses')
+                ->orderBy('transaksi.created_at', 'desc')
+                ->get();
+            $dikirim = Transaksi::with('detail_transaksi.product')
+                ->join('users', 'transaksi.user_id', '=', 'users.id')
+                ->join('profile', 'users.id', '=', 'profile.user_id')
+                ->select('transaksi.*', 'profile.nama')
+                ->where('transaksi.status', 'Dikirim')
+                ->orderBy('transaksi.created_at', 'desc')
+                ->get();
+            $diterima = Transaksi::with('detail_transaksi.product')
+                ->join('users', 'transaksi.user_id', '=', 'users.id')
+                ->join('profile', 'users.id', '=', 'profile.user_id')
+                ->select('transaksi.*', 'profile.nama')
+                ->where('transaksi.status', 'Diterima')
+                ->orderBy('transaksi.created_at', 'desc')
+                ->get();
+        }
         return view('pages-penjual.transaksi.index', compact('title', 'diproses', 'dikirim', 'diterima'));
     }
 
@@ -80,10 +104,17 @@ class TransaksiController extends Controller
     public function edit(string $id)
     {
         $order =  Transaksi::find($id);
-        $order->status = 'Dikirim';
-        $order->update();
-        return redirect('transaksi')->with('success', 'Produk Telah Dikirim');
+        if ($order->status == 'Diproses') {
+            $order->status = 'Dikirim';
+            $order->update();
+            return redirect('transaksi')->with('success', 'Produk Telah Dikirim');
+        } else {
+            $order->status = 'Diterima';
+            $order->update();
+            return redirect('transaksi')->with('success', 'Produk Telah Diterima');
+        }
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -101,35 +132,57 @@ class TransaksiController extends Controller
         //
     }
 
-    public function pdf(){
-        $diproses = Transaksi::with('detail_transaksi.product')
-            ->join('users', 'transaksi.user_id', '=', 'users.id')
-            ->join('profile', 'users.id', '=', 'profile.user_id')
-            ->whereHas('detail_transaksi.product', function ($query) {
-                $query->where('penjual_id', Auth::user()->penjual->id);
-            })
-            ->where('transaksi.status', 'Diproses')
-            ->orderBy('transaksi.created_at', 'desc')
-            ->get();
-        $dikirim = Transaksi::with('detail_transaksi.product')
-            ->join('users', 'transaksi.user_id', '=', 'users.id')
-            ->join('profile', 'users.id', '=', 'profile.user_id')
-            ->whereHas('detail_transaksi.product', function ($query) {
-                $query->where('penjual_id', Auth::user()->penjual->id);
-            })
-            ->where('transaksi.status', 'Dikirim')
-            ->orderBy('transaksi.created_at', 'desc')
-            ->get();
-        $diterima = Transaksi::with('detail_transaksi.product')
-            ->join('users', 'transaksi.user_id', '=', 'users.id')
-            ->join('profile', 'users.id', '=', 'profile.user_id')
-            ->whereHas('detail_transaksi.product', function ($query) {
-                $query->where('penjual_id', Auth::user()->penjual->id);
-            })
-            ->where('transaksi.status', 'Diterima')
-            ->orderBy('transaksi.created_at', 'desc')
-            ->get();
+    public function pdf()
+    {
 
+        if (Auth::user()->role == 'Penjual') {
+            $diproses = Transaksi::with('detail_transaksi.product')
+                ->join('users', 'transaksi.user_id', '=', 'users.id')
+                ->join('profile', 'users.id', '=', 'profile.user_id')
+                ->whereHas('detail_transaksi.product', function ($query) {
+                    $query->where('penjual_id', Auth::user()->penjual->id);
+                })
+                ->where('transaksi.status', 'Diproses')
+                ->orderBy('transaksi.created_at', 'desc')
+                ->get();
+            $dikirim = Transaksi::with('detail_transaksi.product')
+                ->join('users', 'transaksi.user_id', '=', 'users.id')
+                ->join('profile', 'users.id', '=', 'profile.user_id')
+                ->whereHas('detail_transaksi.product', function ($query) {
+                    $query->where('penjual_id', Auth::user()->penjual->id);
+                })
+                ->where('transaksi.status', 'Dikirim')
+                ->orderBy('transaksi.created_at', 'desc')
+                ->get();
+            $diterima = Transaksi::with('detail_transaksi.product')
+                ->join('users', 'transaksi.user_id', '=', 'users.id')
+                ->join('profile', 'users.id', '=', 'profile.user_id')
+                ->whereHas('detail_transaksi.product', function ($query) {
+                    $query->where('penjual_id', Auth::user()->penjual->id);
+                })
+                ->where('transaksi.status', 'Diterima')
+                ->orderBy('transaksi.created_at', 'desc')
+                ->get();
+        } else {
+            $diproses = Transaksi::with('detail_transaksi.product')
+                ->join('users', 'transaksi.user_id', '=', 'users.id')
+                ->join('profile', 'users.id', '=', 'profile.user_id')
+                ->where('transaksi.status', 'Diproses')
+                ->orderBy('transaksi.created_at', 'desc')
+                ->get();
+            $dikirim = Transaksi::with('detail_transaksi.product')
+                ->join('users', 'transaksi.user_id', '=', 'users.id')
+                ->join('profile', 'users.id', '=', 'profile.user_id')
+                ->where('transaksi.status', 'Dikirim')
+                ->orderBy('transaksi.created_at', 'desc')
+                ->get();
+            $diterima = Transaksi::with('detail_transaksi.product')
+                ->join('users', 'transaksi.user_id', '=', 'users.id')
+                ->join('profile', 'users.id', '=', 'profile.user_id')
+                ->where('transaksi.status', 'Diterima')
+                ->orderBy('transaksi.created_at', 'desc')
+                ->get();
+        }
         $pdf = PDF::loadView('pages-penjual.transaksi.transaksi_pdf', compact('diproses', 'dikirim', 'diterima'))->setPaper('a4', 'landscape');
         return $pdf->stream();
     }

@@ -49,6 +49,18 @@
                     </span>
                     My order history
                 </a>
+                <a href="{{route('belum_dibayar')}}" class="relative hover:text-red-600 block capitalize transition">
+                    Belum Dibayar
+                </a>
+                <a href="{{route('history')}}" class="relative hover:text-red-600 block capitalize transition">
+                    Diproses
+                </a>
+                <a href="{{route('dikirim')}}" class="relative hover:text-red-600 block capitalize transition">
+                    Dikirim
+                </a>
+                <a href="{{route('diterima')}}" class="relative hover:text-red-600 block capitalize transition">
+                    Diterima
+                </a>
             </div>
 
             <div class="space-y-1 pl-8 pt-4">

@@ -23,6 +23,17 @@
                         <label for="exampleInputBarang">Nama Barang</label>
                         <input type="text" class="form-control" id="exampleInputBarang" name="nama" placeholder="Input Barang" required value="{{$data->nama}}">
                     </div>
+                    @if(Auth::user()->role == 'Admin')
+                    <div class="form-group">
+                        <label for="exampleInputPenjual">Penjual</label>
+                            <select class="custom-select rounded-0" id="exampleInputPenjual" name="penjual_id" required>
+                                <option value="">--- Pilih Penjual---</option>
+                                @foreach($penjual as $penjual)
+                                <option value="{{$penjual->id}}" {{($data->penjual_id == $penjual->id) ? 'selected' : ''}}>{{$penjual->nama_toko}}</option>
+                                @endforeach
+                            </select>
+                    </div>
+                    @endif
                     <div class="form-group">
                         <label for="exampleInputJenisMakanan">Jenis Makanan</label>
                         <select class="custom-select rounded-0" id="exampleInputJenisMakanan" name="jenis" required>

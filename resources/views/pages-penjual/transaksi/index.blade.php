@@ -27,7 +27,7 @@
                             <td>{{$x++}}</td>
                             <td>{{$diproses->nama}}</td>
                             <td>{{$diproses->tanggal}}</td>
-                            @if($diproses->payment_status == 'waiting')
+                            @if($diproses->payment_status == 'waiting' || $diproses->payment_status == 'pending')
                             <td><span class="badge badge-danger">Belum Dibayar</span></td>
                             @else
                             <td><span class="badge badge-success">Lunas</span></td>
@@ -64,7 +64,7 @@
                             <td>{{$x++}}</td>
                             <td>{{$dikirim->nama}}</td>
                             <td>{{$dikirim->tanggal}}</td>
-                            @if($dikirim->payment_status == 'waiting')
+                            @if($dikirim->payment_status == 'waiting' || $dikirim->payment_status == 'pending')
                             <td><span class="badge badge-danger">Belum Dibayar</span></td>
                             @else
                             <td><span class="badge badge-success">Lunas</span></td>
@@ -72,6 +72,7 @@
                             <td>Rp. {{number_format($dikirim->total, 0, ",", ".")}}</td>
                             <td>
                                 <a class="btn btn-primary btn-sm" onclick="show_lg('<?= route('transaksi-detail', $dikirim->id) ?>')"><i class="fas fa-eye"></i></a>
+                                <a class="btn btn-success btn-sm" href="{{route('transaksi-edit',$$dikirim->id)}}"><i class="fas fa-handshake"></i></a>
                             </td>
                         </tr>
                         @endforeach
@@ -101,7 +102,7 @@
                             <td>{{$x++}}</td>
                             <td>{{$data->nama}}</td>
                             <td>{{$data->tanggal}}</td>
-                            @if($data->payment_status == 'waiting')
+                            @if($data->payment_status == 'waiting' || $data->payment_status == 'pending')
                             <td><span class="badge badge-danger">Belum Dibayar</span></td>
                             @else
                             <td><span class="badge badge-success">Lunas</span></td>

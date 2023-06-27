@@ -66,25 +66,9 @@
                         </p>
                     </a>
                 </li>
+                @endif
 
-                <li class="nav-item">
-                    <a href="{{url('produk')}}" class="nav-link {{($title == 'Data Produk' || $title == 'Edit Data Produk') ? 'active' : '' }}">
-                        <i class="fas fa-utensils"></i>
-                        <p>
-                            &nbsp;&nbsp; Produk
-                        </p>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a href="{{url('transaksi')}}" class="nav-link {{($title == 'Manajemen Transaksi') ? 'active' : '' }}">
-                        <i class="fas fa-money-check"></i>
-                        <p>
-                            &nbsp;&nbsp; Transaksi
-                        </p>
-                    </a>
-                </li>
-                @elseif(Auth::user()->role == 'Admin')
+                @if(Auth::user()->role == 'Admin')
                 <li class="nav-item">
                     <a href="{{url('home_admin')}}" class="nav-link {{($title == 'Dashboard') ? 'active' : '' }}">
                         <i class="fas fa-home"></i>
@@ -103,6 +87,24 @@
                     </a>
                 </li>
                 @endif
+
+                <li class="nav-item">
+                    <a href="{{url('produk')}}" class="nav-link {{($title == 'Data Produk' || $title == 'Edit Data Produk') ? 'active' : '' }}">
+                        <i class="fas fa-utensils"></i>
+                        <p>
+                            &nbsp;&nbsp; Produk
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{url('transaksi')}}" class="nav-link {{($title == 'Manajemen Transaksi') ? 'active' : '' }}">
+                        <i class="fas fa-money-check"></i>
+                        <p>
+                            &nbsp;&nbsp; Transaksi
+                        </p>
+                    </a>
+                </li>
                 <!-- <li class="nav-header">EXAMPLES</li> -->
             </ul>
         </nav>

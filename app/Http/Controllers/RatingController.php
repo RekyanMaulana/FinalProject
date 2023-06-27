@@ -41,7 +41,7 @@ class RatingController extends Controller
                 'detail_transaksi_id' => $data->id
             ]);
         }
-        return redirect('history')->with('success','Review Berhasil');
+        return redirect('history/diterima')->with('success','Review Berhasil');
     }
 
     /**

@@ -125,7 +125,11 @@ class ProductController extends Controller
         $data->deskripsi_barang = $request->deskripsi_barang;
 
         if (Auth::user()->role == 'Admin') {
+<<<<<<< HEAD
             $data->penjual_id  = $request->penjual_id;
+=======
+            $penjual_id = $request->penjual_id;
+>>>>>>> d53c4977c72d701dd2435ad04d2e4133275b1bb0
         }
 
         if ($request->hasFile('foto')) {
